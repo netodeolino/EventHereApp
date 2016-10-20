@@ -13,4 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
+    <TextView
+        android:layout_width="2000dp"
+        android:layout_height="2000dp"
+        android:text="hello world matheus!"
+        />
+
 </RelativeLayout>

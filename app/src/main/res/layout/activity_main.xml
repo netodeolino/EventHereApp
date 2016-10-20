@@ -17,7 +17,7 @@
     <TextView
         android:layout_width="2000dp"
         android:layout_height="2000dp"
-        android:text="hello world matheus!"
+        android:text="hello world matheus branch!"
         />
 
 </RelativeLayout>

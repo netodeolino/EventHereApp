@@ -9,15 +9,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.neto.deolino.trabalhoandroid.MainActivity">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:layout_width="2000dp"
-        android:layout_height="2000dp"
-        android:text="hello world matheus branch!"
-        />
-
+        android:text="Hello ALGUMA COISA" />
 </RelativeLayout>

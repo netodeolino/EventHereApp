@@ -54,7 +54,7 @@
 
     </LinearLayout>
 
-<!-- CONCERTAR ERRO QUE OCORRE QUANDO ADICIONA ESSE BUTTON
+<!-- Concertar ERRO que ocorre quando adiciona esse button
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFb"
         android:layout_width="wrap_content"
@@ -71,7 +71,6 @@
         android:id="@+id/btnCreateAccount"
         android:layout_above="@+id/btnResetPassword"
         android:layout_centerHorizontal="true"
-        android:onClick="createAccount"
         style="@style/noBorderButton"/>
 
     <Button

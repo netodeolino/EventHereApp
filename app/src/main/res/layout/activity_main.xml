@@ -71,6 +71,7 @@
         android:id="@+id/btnCreateAccount"
         android:layout_above="@+id/btnResetPassword"
         android:layout_centerHorizontal="true"
+        android:onClick="createAccount"
         style="@style/noBorderButton"/>
 
     <Button

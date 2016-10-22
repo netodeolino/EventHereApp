@@ -15,6 +15,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.neto.deolino.trabalhoandroid.CreateAccountActivity"
+            android:label="@string/createAccountActivityLabel"
+            android:parentActivityName="com.neto.deolino.trabalhoandroid.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

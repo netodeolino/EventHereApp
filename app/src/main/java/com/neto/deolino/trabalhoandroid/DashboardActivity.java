@@ -89,8 +89,8 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     /*
-This method is executed when the activity is created to populate the ActionBar with actions
-*/
+        This method is executed when the activity is created to populate the ActionBar with actions
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -117,13 +117,6 @@ This method is executed when the activity is created to populate the ActionBar w
                 startActivity(new Intent(this, MySettingsActivity.class));
                 break;
             case R.id.menuLogOut:
-                /*UserDAO dao = new UserDAO(this);
-                dao.remove(user.getId());
-                dao.close();
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-                editor.remove("user_id");
-                editor.remove("language");
-                editor.apply();*/
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 break;

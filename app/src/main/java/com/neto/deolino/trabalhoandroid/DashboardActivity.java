@@ -1,20 +1,12 @@
 package com.neto.deolino.trabalhoandroid;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-
-import com.neto.deolino.trabalhoandroid.model.Event;
-import com.neto.deolino.trabalhoandroid.model.Location;
-
-import java.util.ArrayList;
 
 
 /**
@@ -23,32 +15,17 @@ import java.util.ArrayList;
 public class DashboardActivity extends AppCompatActivity {
 
     ListView recentEventsListView;
-    //User user;
-    Context context;
-
-    final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 5;
-
-    int eventID;
-
-    final ArrayList<Event> arrayOfEvents = new ArrayList<>();
-
-    /**
-     * Represents a geographical location.
-     */
-    protected Location mLastLocation;
-    protected static final String TAG = "DashboardActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+        //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
 
-        context = this;
+        //context = this;
 
         // When an item in the list is clicked
-        recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("DashboardActivity", "Item " + position + " clicked");
@@ -58,15 +35,14 @@ public class DashboardActivity extends AppCompatActivity {
                 intent.putExtra("eventID", eventID);
                 startActivity(intent);
             }
-        });
+        });*/
 //        populateEventsList();
     }
 
 
     private void populateEventsList() {
         //Construct data source
-
-        arrayOfEvents.clear();
+        //arrayOfEvents.clear();
     }
 
     private void populateAllEventsList() {
@@ -74,7 +50,6 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void dashboardButtonClicked(View view) {
-
         Intent intent = null;
         switch (view.getId()) {
             case R.id.btn_create_route:
@@ -87,13 +62,11 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     /*
         This method is executed when the activity is created to populate the ActionBar with actions
     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.dashboard_menu, menu);
         menu.findItem(R.id.menuMyAccount).setVisible(true);
         //if (user.getImage() != null)
@@ -130,5 +103,4 @@ public class DashboardActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

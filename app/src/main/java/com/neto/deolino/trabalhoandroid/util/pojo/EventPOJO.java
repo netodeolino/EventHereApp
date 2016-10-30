@@ -51,8 +51,8 @@ public class EventPOJO extends AbstractPOJO{
             this.setId(event.getId());
             this.setType(event.getType());
             this.setDate(DateHelper.toFormatString(event.getDate()));
-            this.setDeparture(event.getDeparture());
-            this.setArrival(event.getArrival());
+            //this.setDeparture(event.getDeparture());
+            //this.setArrival(event.getArrival());
             this.setDescription(event.getDescription());
             this.setSecret(event.isSecret());
             this.setOrganizer(new UserPOJO().new Users(event.getOrganizer()));
@@ -147,8 +147,8 @@ public class EventPOJO extends AbstractPOJO{
             res.setId(this.getId());
             res.setType(this.getType());
             res.setDate(DateHelper.toDate(this.getDate()));
-            res.setDeparture(this.getDeparture());
-            res.setArrival(this.getArrival());
+            //res.setDeparture(this.getDeparture());
+            //res.setArrival(this.getArrival());
             res.setDescription(this.getDescription());
             res.setSecret(this.isSecret());
             res.setOrganizer((this.getOrganizer().getUser()));

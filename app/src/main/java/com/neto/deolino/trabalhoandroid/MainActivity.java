@@ -1,8 +1,6 @@
 package com.neto.deolino.trabalhoandroid;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,23 +8,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.login.widget.LoginButton;
-
-//import com.facebook.FacebookSdk; Ativar quando for ativar login com facebook
-
 public class MainActivity extends AppCompatActivity {
 
-    //public static final User user = new User();
-    LoginButton btLogin;
-    CallbackManager callbackManager;
     EditText etMail, etPassword;
     ProgressBar pbLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
     }
 
@@ -45,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(){
-        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
-        finish();
+        startActivity(new Intent(this, DashboardActivity.class));
     }
 }

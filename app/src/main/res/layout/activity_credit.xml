@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreditActivity">
+
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp">
+
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_anderson"
+            android:src="@drawable/anderson"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_elli"
+            android:src="@drawable/elli"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/anderson_lemos"
+            android:id="@+id/tvAnderson"
+            android:layout_marginTop="5dp"
+            style="@style/creditSettings"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/ellinoora_laaksonen"
+            android:id="@+id/tvElli"
+            android:layout_marginTop="5dp"
+            style="@style/creditSettings"
+            android:layout_gravity="center_horizontal" />
+
+    </GridLayout>
+</LinearLayout>

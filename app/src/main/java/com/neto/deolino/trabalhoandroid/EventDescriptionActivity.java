@@ -71,7 +71,6 @@ This method is executed when the activity is created to populate the ActionBar w
                 invite.setVisible(false);
             }
         }
-
         getMenuInflater().inflate(R.menu.event_desc_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
@@ -82,7 +81,6 @@ This method is executed when the activity is created to populate the ActionBar w
         Intent intent;
         switch (item.getItemId()) {
             case R.id.menuInvite:
-                // User chose the "Invite" item
                 Log.d("EvenDescriptionActivity", "Invite Pressed!");
                 intent = new Intent(context, InviteActivity.class);
                 intent.putExtra("eventID", eventID );
@@ -90,27 +88,10 @@ This method is executed when the activity is created to populate the ActionBar w
                 return true;
 
             case R.id.menuShowRoute:
-                // User chose the "Show Route" item
                 Log.d("EvenDescriptionActivity", "Show Route Pressed!");
                 return true;
 
             case R.id.menuParticipate:
-                // User chose the "Participate" item
-                /*Log.d("EvenDescriptionActivity", "Participate Pressed!");
-                EventService service = new EventService();
-                service.confirmAttendance(eventID, userID, new AsyncExecutable() {
-                    @Override
-                    public void postExecute(int option) {
-                        Toast.makeText(context, R.string.participated, Toast.LENGTH_SHORT).show();
-                        findViewById(R.id.menuParticipate).setVisibility(View.INVISIBLE);
-                        populatePersonsList();
-                    }
-
-                    @Override
-                    public void preExecute(int option) {
-
-                    }
-                });*/
                 return true;
 
             default:

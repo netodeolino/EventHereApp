@@ -100,6 +100,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity" />
         </activity>
+
         <activity
             android:name="com.neto.deolino.trabalhoandroid.AddFriendsActivity"
             android:label="@string/add_friends"
@@ -126,6 +127,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
+
         <activity
             android:name="com.neto.deolino.trabalhoandroid.MySettingsActivity"
             android:label="@string/title_activity_settings"
@@ -134,6 +136,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
+
         <activity
             android:name="com.neto.deolino.trabalhoandroid.InviteActivity"
             android:label="Invite to the event"

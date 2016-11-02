@@ -37,7 +37,6 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     ListView searchResultListView;
     Context context;
 
-
     TextView tvAddress;
     Button btnSEventDate;
     Button btnSEventTime;
@@ -116,7 +115,6 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         int t = rgEventType.getCheckedRadioButtonId();
         mType.setType(t==R.id.rbSBike ? EventType.Type.BIKE : t==R.id.rbSRun ? EventType.Type.RUN : EventType.Type.HIKE);
 
-//        rgEventType.check(prefs.getInt("eventType", R.id.rbSBike));
         btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         etKm.setText(prefs.getString("km", "1"));
@@ -170,9 +168,6 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
         btnSEventTime.setText(String.format(getString(R.string.time), timeString));
     }
-
-
-
 
     public void searchButtonClicked(View view) {
 

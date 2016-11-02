@@ -103,18 +103,6 @@ public class MyEventsActivity extends AppCompatActivity {
             }
         });
 
-
         tabHost.setCurrentTab(0);
-
-
-        //tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            //@Override
-            //public void onTabChanged(String tabId) {
-            //}
-            //recent events
-                /* Here */
-            //invited events
-                /* Here */
-        //}
     }
 }

@@ -168,6 +168,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     }
 
     public void createEventButtonPressed(View view){
-
+        /*Intent intent = new Intent(context, EventDescriptionActivity.class);
+        intent.putExtra("eventID", 0); //teste
+        startActivity(intent);*/
+        startActivity(new Intent(this, EventDescriptionActivity.class));
     }
 }

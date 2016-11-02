@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.neto.deolino.trabalhoandroid.model.User;
@@ -27,11 +28,13 @@ public class MyFriendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_friends);
         context = this;
 
-        populateFriendsList();
-    }
+        final ListView listaDeCursos = (ListView) findViewById(R.id.lvMyFriends);
 
-    private void populateFriendsList() {
+        String[] cursos = new String[]{"Raimundo Matheus", "Neto Deolino", "Marcio Maia", "Android Studio"};
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, cursos);
+        listaDeCursos.setAdapter(adapter);
     }
 
     @Override

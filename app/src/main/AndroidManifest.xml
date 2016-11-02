@@ -60,6 +60,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
+
         <activity
             android:name="com.neto.deolino.trabalhoandroid.EventDescriptionActivity"
             android:label="@string/eventDescriptionActivityLabel"
@@ -68,6 +69,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
+
         <activity
             android:name="com.neto.deolino.trabalhoandroid.MyEventsActivity"
             android:label="@string/myEventsActivityLabel"

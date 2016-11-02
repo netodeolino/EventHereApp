@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -18,22 +20,18 @@ public class AddFriendsActivity extends AppCompatActivity {
 
     ListView friendsSearchListView;
     Context context;
-    EditText etSearchFriend;
-   // User user;
-    ProgressBar pbAddFriends;
-   // ArrayList<User> searchResults;
+    AutoCompleteTextView etSearchFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
 
-        context = this;
-        friendsSearchListView = (ListView) findViewById(R.id.lvFriendsSearch);
-        etSearchFriend = (EditText) findViewById(R.id.etSearchFriend);
-    }
+        String str[] = {"Matheus", "João", "Maria", "José"};
+        AutoCompleteTextView auto = (AutoCompleteTextView) findViewById(R.id.etSearchFriend);
+        ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, str);
 
-    public void searchFriends(View view) {
-
+        auto.setThreshold(1);
+        auto.setAdapter(adp);
     }
 }

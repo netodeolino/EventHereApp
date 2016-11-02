@@ -126,9 +126,12 @@ public class EditAccountActivity extends AppCompatActivity {
 
 
     public void saveButtonClicked(View view){
+        Intent intent;
        // user.setGender(rgSex.getCheckedRadioButtonId()==R.id.rbMale ? Gender.MALE : Gender.FEMALE);
         String name = etName.getText().toString();
         String description = etDescription.getText().toString();
+        intent = new Intent(this, UserDerscriptionActivity.class);
+        startActivity(intent);
        // if(!name.isEmpty()) user.setName(name);
         //if(!description.isEmpty()) user.setDescription(description);
         //if(image != null) user.setImage(image);

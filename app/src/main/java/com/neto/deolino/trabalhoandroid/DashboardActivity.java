@@ -53,7 +53,7 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = null;
         switch (view.getId()) {
             case R.id.btn_create_route:
-                //intent = new Intent(this, CreateEventActivity.class);
+                intent = new Intent(this, CreateEventActivity.class);
                 break;
             case R.id.btn_search_route:
                 intent = new Intent(this, SearchEventActivity.class);
@@ -84,7 +84,7 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
 
             case R.id.menuMyEvents:
-                //startActivity(new Intent(this, MyEventsActivity.class));
+                startActivity(new Intent(this, MyEventsActivity.class));
                 break;
             case R.id.menuSettings:
                 startActivity(new Intent(this, MySettingsActivity.class));

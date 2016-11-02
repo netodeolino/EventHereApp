@@ -3,22 +3,23 @@ package com.neto.deolino.trabalhoandroid;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
-import com.neto.deolino.trabalhoandroid.model.Event;
+import com.neto.deolino.trabalhoandroid.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by deolino on 30/10/16.
- */
 public class MyEventsActivity extends AppCompatActivity {
 
     TabHost tabHost;
@@ -29,8 +30,9 @@ public class MyEventsActivity extends AppCompatActivity {
     Context context;
     int eventID;
 
-    ArrayList<Event> arrayOfEvents = new ArrayList<>();
-
+    String [] eventos1 = {"Evento 1", "Evento 2", "Evento 3"};
+    String [] eventos2 = {"Evento 4", "Evento 5", "Evento 6"};
+    String [] eventos3 = {"Evento 7", "Evento 8", "Evento 9"};
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -66,43 +68,49 @@ public class MyEventsActivity extends AppCompatActivity {
         spec.setContent(R.id.layoutInvitations);
         tabHost.addTab(spec);
 
-        upcomingEventsListView = (ListView) findViewById(R.id.lvMyUpcomingEvents);
-        recentEventsListView = (ListView) findViewById(R.id.lvMyRecentEvents);
-        invitationsListView = (ListView) findViewById(R.id.lvMyInvitations);
+        final ListView upcomingEventsListView = (ListView) findViewById(R.id.lvMyUpcomingEvents);
+        final ListView recentEventsListView = (ListView) findViewById(R.id.lvMyRecentEvents);
+        final ListView invitationsListView = (ListView) findViewById(R.id.lvMyInvitations);
+
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, eventos1);
+        upcomingEventsListView.setAdapter(adapter1);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, eventos2);
+        recentEventsListView.setAdapter(adapter2);
+
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, eventos3);
+        invitationsListView.setAdapter(adapter3);
 
         upcomingEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MyEventsActivity", "Item " + position + " clicked");
-                eventID = arrayOfEvents.get(position).getId();
-                Intent intent = new Intent(context, EventDescriptionActivity.class);
-                intent.putExtra("eventID", eventID);
-                startActivity(intent);
+                int itemP = position;
+                String itemV = (String) upcomingEventsListView.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), "Position:" + itemP+ "ListItem:" + itemV, Toast.LENGTH_LONG).show();
             }
         });
 
         recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MyEventsActivity", "Item " + position + " clicked");
-                eventID = arrayOfEvents.get(position).getId();
-                Intent intent = new Intent(context, EventDescriptionActivity.class);
-                intent.putExtra("eventID", eventID);
-                startActivity(intent);
+                int itemP = position;
+                String itemV = (String) recentEventsListView.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), "Position:" + itemP+ "ListItem:" + itemV, Toast.LENGTH_LONG).show();
             }
         });
 
         invitationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MyEventsActivity", "Item " + position + " clicked");
-                eventID = arrayOfEvents.get(position).getId();
-                Intent intent = new Intent(context, EventDescriptionActivity.class);
-                intent.putExtra("eventID", eventID);
-                startActivity(intent);
+                int itemP = position;
+                String itemV = (String) invitationsListView.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(), "Position:" + itemP+ "ListItem:" + itemV, Toast.LENGTH_LONG).show();
             }
         });
-
-        tabHost.setCurrentTab(0);
     }
+
 }

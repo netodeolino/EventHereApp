@@ -3,23 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreditActivity">
+    tools:context=".CreditActivity"
+    android:weightSum="1">
 
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="212dp"
         android:columnCount="2"
         android:rowCount="4"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_weight="0.93">
 
 
         <ImageView
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="162dp"
             android:id="@+id/imageView_neto"
             android:src="@drawable/neto"
             android:layout_gravity="center_horizontal"
@@ -34,7 +36,7 @@
 
         <TextView
             android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:layout_height="64dp"
             android:text="@string/neto_deolino"
             android:id="@+id/tvNeto"
             android:layout_marginTop="5dp"
@@ -44,7 +46,7 @@
 
         <TextView
             android:layout_width="150dp"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             android:text="@string/matheus_pereira"
             android:id="@+id/tvMatheus"
             android:layout_marginTop="5dp"

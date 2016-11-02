@@ -20,7 +20,6 @@ import android.widget.TimePicker;
 
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
-import com.neto.deolino.trabalhoandroid.util.Constants;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;

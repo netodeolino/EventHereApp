@@ -84,7 +84,7 @@ public class DashboardActivity extends AppCompatActivity {
                 break;
 
             case R.id.menuMyEvents:
-                //startActivity(new Intent(this, MyEventsActivity.class));
+                startActivity(new Intent(this, MyEventsActivity.class));
                 break;
             case R.id.menuSettings:
                 startActivity(new Intent(this, MySettingsActivity.class));

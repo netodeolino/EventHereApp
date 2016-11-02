@@ -76,7 +76,7 @@
             android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
+                android:value="com.neto.deolino.trabalhoandroid.EventDescriptionActivity" />
         </activity>
         <activity
             android:name="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity"

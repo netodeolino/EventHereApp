@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.neto.deolino.trabalhoandroid.model.User;
 
 import java.util.ArrayList;
 
@@ -20,9 +19,9 @@ public class AddFriendsActivity extends AppCompatActivity {
     ListView friendsSearchListView;
     Context context;
     EditText etSearchFriend;
-    User user;
+   // User user;
     ProgressBar pbAddFriends;
-    ArrayList<User> searchResults;
+   // ArrayList<User> searchResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

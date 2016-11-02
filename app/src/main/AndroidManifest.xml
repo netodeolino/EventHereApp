@@ -53,32 +53,6 @@
         </activity>
 
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.CreateEventActivity"
-            android:label="@string/createEventActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
-        </activity>
-
-        <activity
-            android:name="com.neto.deolino.trabalhoandroid.EventDescriptionActivity"
-            android:label="@string/eventDescriptionActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
-        </activity>
-
-        <activity
-            android:name="com.neto.deolino.trabalhoandroid.MyEventsActivity"
-            android:label="@string/myEventsActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
-        </activity>
-        <activity
             android:name="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity"
             android:label="@string/UserDescriptionActivityLabel"
             android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
@@ -94,14 +68,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity" />
         </activity>
-        <activity
-            android:name="com.neto.deolino.trabalhoandroid.MyFriendsActivity"
-            android:label="@string/my_friends"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity" />
-        </activity>
 
         <activity
             android:name="com.neto.deolino.trabalhoandroid.AddFriendsActivity"
@@ -110,15 +76,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.MyFriendsActivity" />
-        </activity>
-
-        <activity
-            android:name="com.neto.deolino.trabalhoandroid.MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
 
         <activity
@@ -137,15 +94,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
-        </activity>
-
-        <activity
-            android:name="com.neto.deolino.trabalhoandroid.InviteActivity"
-            android:label="Invite to the event"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.EventDescriptionActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.neto.deolino.trabalhoandroid.EventDescriptionActivity" />
         </activity>
 
     </application>

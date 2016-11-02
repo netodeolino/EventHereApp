@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.neto.deolino.trabalhoandroid.enumerations.Gender;
-import com.neto.deolino.trabalhoandroid.model.User;
 
 /**
  * Created by deolino on 30/10/16.
@@ -35,7 +34,6 @@ public class EditAccountActivity extends AppCompatActivity {
     EditText etDescription;
     RadioGroup rgSex;
     Bitmap image;
-    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,12 +124,13 @@ public class EditAccountActivity extends AppCompatActivity {
         }
     }
 
+
     public void saveButtonClicked(View view){
-        user.setGender(rgSex.getCheckedRadioButtonId()==R.id.rbMale ? Gender.MALE : Gender.FEMALE);
+       // user.setGender(rgSex.getCheckedRadioButtonId()==R.id.rbMale ? Gender.MALE : Gender.FEMALE);
         String name = etName.getText().toString();
         String description = etDescription.getText().toString();
-        if(!name.isEmpty()) user.setName(name);
-        if(!description.isEmpty()) user.setDescription(description);
-        if(image != null) user.setImage(image);
+       // if(!name.isEmpty()) user.setName(name);
+        //if(!description.isEmpty()) user.setDescription(description);
+        //if(image != null) user.setImage(image);
     }
 }

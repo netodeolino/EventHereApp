@@ -25,8 +25,32 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity
+            android:name="com.neto.deolino.trabalhoandroid.DashboardActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.neto.deolino.trabalhoandroid.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
+        <activity
+            android:name="com.neto.deolino.trabalhoandroid.ResetPasswordActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.neto.deolino.trabalhoandroid.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
 
+        <activity
+            android:name="com.neto.deolino.trabalhoandroid.SearchEventActivity"
+            android:label="@string/searchEventsActivityLabel"
+            android:parentActivityName="com.neto.deolino.trabalhoandroid.EventDescriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
+        </activity>
 
         <activity
             android:name="com.neto.deolino.trabalhoandroid.CreateEventActivity"

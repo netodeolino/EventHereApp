@@ -44,6 +44,15 @@
         </activity>
 
         <activity
+            android:name="com.neto.deolino.trabalhoandroid.SearchEventActivity"
+            android:label="@string/searchEventsActivityLabel"
+            android:parentActivityName="com.neto.deolino.trabalhoandroid.EventDescriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
+        </activity>
+
+        <activity
             android:name="com.neto.deolino.trabalhoandroid.CreateEventActivity"
             android:label="@string/createEventActivityLabel"
             android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">

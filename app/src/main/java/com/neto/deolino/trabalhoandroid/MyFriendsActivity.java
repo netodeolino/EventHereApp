@@ -28,17 +28,6 @@ public class MyFriendsActivity extends AppCompatActivity {
         context = this;
 
         populateFriendsList();
-
-        friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //User person = (User)friendsListView.getAdapter().getItem(position);
-                Intent intent = new Intent(getApplicationContext(), UserDerscriptionActivity.class);
-                //intent.putExtra("id_person", person.getId());
-                intent.putExtra("id_person", 0); //teste
-                startActivity(intent);
-            }
-        });
     }
 
     private void populateFriendsList() {

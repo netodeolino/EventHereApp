@@ -47,21 +47,6 @@ public class MySettingsActivity extends AppCompatActivity {
     }
 
     private void changeLanguage(int code){
-        /*String l = "en_US";
-        switch (code){
-            case 1: l = "es_ES";break;
-            case 2: l = "pt_BR";break;
-            case 3: l = "pl_PL";break;
-            case 4: l = "fi_FI";break;
-            case 5: l = "de_DE";break;
-        }
-        Locale locale = new Locale(l);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getResources().updateConfiguration(config, null);
-
-        Log.d("LOCALE", Locale.getDefault().getLanguage());*/
     }
 
     public void changePasswordButtonClicked(View view){

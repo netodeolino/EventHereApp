@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.neto.deolino.trabalhoandroid.model.User;
 
 /**
  * Created by deolino on 30/10/16.
@@ -20,7 +19,7 @@ public class UserDerscriptionActivity extends AppCompatActivity {
 
     ImageView ivUser, ivGender;
     TextView tvName, tvDescription;
-    User user;
+    //User user;
     Bundle extras;
 
     @Override
@@ -55,12 +54,12 @@ public class UserDerscriptionActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menuMyFriends:
-                intent = new Intent(this, MyFriendsActivity.class);
-                startActivity(intent);
+              //  intent = new Intent(this, MyFriendsActivity.class);
+              //  startActivity(intent);
                 break;
             case R.id.menuMyEvents:
-                intent = new Intent(this, MyEventsActivity.class);
-                startActivity(intent);
+               // intent = new Intent(this, MyEventsActivity.class);
+                //startActivity(intent);
             default:
                 finish();
         }

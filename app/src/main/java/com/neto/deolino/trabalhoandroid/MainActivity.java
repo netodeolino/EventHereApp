@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAccount(View view) {
         startActivity(new Intent(this, CreateAccountActivity.class));
-        //startActivity(new Intent(getApplicationContext(), DashboardActivity.class)); //teste
     }
 
     public void loginButtonClicked(View view){

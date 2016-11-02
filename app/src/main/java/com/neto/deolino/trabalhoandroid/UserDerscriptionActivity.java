@@ -32,17 +32,6 @@ public class UserDerscriptionActivity extends AppCompatActivity {
         tvName = (TextView) findViewById(R.id.tvUserName);
         tvDescription = (TextView) findViewById(R.id.tvUserDescription);
         extras = getIntent().getExtras();
-        getChoosenAccount();
-
-
-    }
-
-    private void getChoosenAccount(){
-
-    }
-
-    private void updateComponents(){
-
     }
 
     @Override
@@ -88,7 +77,6 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             editor.remove("sex");
             editor.remove("description");
             editor.apply();
-            getChoosenAccount();
         }
     }
 }

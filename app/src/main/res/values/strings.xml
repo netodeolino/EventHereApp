@@ -146,10 +146,8 @@
     <string name="facebook_error">Error connecting to facebook</string>
     <string name="facebook_app_id" translatable="false">540733856113131</string>
 
-    <string name="anderson_lemos" translatable="false">Anderson Lemos</string>
-    <string name="ellinoora_laaksonen" translatable="false">Ellinoora Laaksonen</string>
-    <string name="magdalena_popinska" translatable="false">Magdalena Popinska</string>
-    <string name="markus_degenhardt" translatable="false">Markus Degenhardt</string>
+    <string name="neto_deolino" translatable="false">Neto Deolino</string>
+    <string name="matheus_pereira" translatable="false">Matheus Pereira</string>
     <string name="title_activity_credit">Credits</string>
     <string name="log_out">Log out</string>
     <string name="credits">Credits</string>

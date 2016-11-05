@@ -11,30 +11,31 @@ import java.util.List;
  */
 public class EventDAO {
 
-    List<Event> usersTemp = new ArrayList<Event>();
+    List<Event> eventsTemp = new ArrayList<Event>();
 
     public EventDAO(){
 
     }
 
     public void insert(Event event) {
-        usersTemp.add(event);
+        eventsTemp.add(event);
     }
 
     public void update(Event event) {
-        int index = usersTemp.indexOf(event);
+        int index = eventsTemp.indexOf(event);
         if(index >= 0){
-            usersTemp.remove(index);
-            usersTemp.add(event);
+            eventsTemp.remove(index);
+            eventsTemp.add(event);
         }
     }
 
     public void remove(int id) {
         Event bye = new Event();
         bye.setId(id);
-        int index = usersTemp.indexOf(bye);
+
+        int index = eventsTemp.indexOf(bye);
         if(index >= 0){
-            usersTemp.remove(index);
+            eventsTemp.remove(index);
         }
     }
 
@@ -42,11 +43,14 @@ public class EventDAO {
         Event bye = new Event();
         bye.setId(id);
 
-        int index = usersTemp.indexOf(bye);
-
+        int index = eventsTemp.indexOf(bye);
         if(index >= 0){
-            return usersTemp.get(index);
+            return eventsTemp.get(index);
         }
         return null;
+    }
+
+    public List<Event> listAll(){
+        return eventsTemp;
     }
 }

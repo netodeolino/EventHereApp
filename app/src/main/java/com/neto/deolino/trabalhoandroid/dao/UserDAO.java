@@ -1,5 +1,7 @@
 package com.neto.deolino.trabalhoandroid.dao;
 
+import android.content.Context;
+
 import com.neto.deolino.trabalhoandroid.model.User;
 
 import java.util.ArrayList;
@@ -10,10 +12,14 @@ import java.util.List;
  */
 public class UserDAO {
 
+    private Context context;
     List<User> usersTemp = new ArrayList<User>();
 
     public UserDAO(){
+    }
 
+    public UserDAO(Context context){
+        this.context = context;
     }
 
     public void insert(User user) {
@@ -47,5 +53,9 @@ public class UserDAO {
             return usersTemp.get(index);
         }
         return null;
+    }
+
+    public List<User> listAll(){
+        return usersTemp;
     }
 }

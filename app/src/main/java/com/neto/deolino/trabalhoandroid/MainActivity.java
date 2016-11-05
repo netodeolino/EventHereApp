@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginButtonClicked(View view){
+
+        // RECUPERAR CADASTRO DO USUARIO NO ARRAYLIST, COMPARAR E FAZER LOGIN
+
         //String mail = etMail.getText().toString();
         //String password = etPassword.getText().toString();
         //if(mail.isEmpty() || password.isEmpty()){

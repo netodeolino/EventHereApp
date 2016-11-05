@@ -1,6 +1,8 @@
 package com.neto.deolino.trabalhoandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,9 +18,15 @@ import com.facebook.GraphRequest;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.neto.deolino.trabalhoandroid.dao.UserDAO;
+import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final User user = new User();
     EditText etMail, etPassword;
     ProgressBar pbLogin;
     CallbackManager callbackManager;
@@ -30,8 +38,15 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
+        etMail = (EditText) findViewById(R.id.etMail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        //btLogin = (LoginButton) findViewById(R.id.btnFb);
+        pbLogin = (ProgressBar) findViewById(R.id.pbLogin);
+        pbLogin.setVisibility(View.GONE);
+
         callbackManager = CallbackManager.Factory.create();
 
+        //NAO ESTA SENDO USADO - FACEBOOK NAO ESTA FUNCIONANDO
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -62,19 +77,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginButtonClicked(View view){
+        String mail = etMail.getText().toString();
+        String password = etPassword.getText().toString();
 
-        // RECUPERAR CADASTRO DO USUARIO NO ARRAYLIST, COMPARAR E FAZER LOGIN
-
-        //String mail = etMail.getText().toString();
-        //String password = etPassword.getText().toString();
-        //if(mail.isEmpty() || password.isEmpty()){
-        //    Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
-        //} else {
-            login();
-        //}
+        List<User> users = new UserDAO().getListAll();
+        if(mail.isEmpty() || password.isEmpty()){
+                Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
+        } else {
+            for (User a : users) {
+                if ((a.getMail().equals(mail)) && (a.getPassword().equals(PasswordHelper.md5(password)))) {
+                    MainActivity.user.copy(user);
+                    login();
+                }
+            }
+        }
+        //Toast.makeText(MainActivity.this, "ERRO NO LOGIN", Toast.LENGTH_LONG).show();
     }
 
     public void login(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("user_id", user.getId());
+        editor.apply();
         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
     }
 

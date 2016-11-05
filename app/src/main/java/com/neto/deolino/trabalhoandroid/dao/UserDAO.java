@@ -13,7 +13,7 @@ import java.util.List;
 public class UserDAO {
 
     private Context context;
-    List<User> usersTemp = new ArrayList<User>();
+    static final List<User> usersTemp = new ArrayList<User>();
 
     public UserDAO(){
     }
@@ -55,7 +55,7 @@ public class UserDAO {
         return null;
     }
 
-    public List<User> listAll(){
+    public List<User> getListAll(){
         return usersTemp;
     }
 }

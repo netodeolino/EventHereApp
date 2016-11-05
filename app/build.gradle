@@ -19,10 +19,15 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.1.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.google.api-client:google-api-client-assembly:1.22.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }

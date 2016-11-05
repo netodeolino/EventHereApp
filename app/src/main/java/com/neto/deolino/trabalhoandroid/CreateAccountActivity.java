@@ -43,8 +43,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             Toast.makeText(CreateAccountActivity.this, getString(R.string.error_password_not_match), Toast.LENGTH_LONG).show();
         }else{
             //Implementação aqui do cadastro
-            //User user = new User(name, mail, PasswordHelper.md5(password), null);
-            User user = new User(name, mail, password, null);
+            User user = new User(name, mail, PasswordHelper.md5(password), null);
             UserDAO userDAO = new UserDAO();
             userDAO.insert(user);
 

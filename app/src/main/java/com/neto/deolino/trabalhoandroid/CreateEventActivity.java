@@ -23,6 +23,7 @@ import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
+import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;
@@ -193,10 +194,10 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         event.setDescription(tvDescription.getText().toString());
         event.setOver(false);
 
-        //ERRADO, PRECISA PEGAR O MESMO ARRAYLIST DO CADASTRO E O LOGADO
         UserDAO dao = new UserDAO(this);
-
         event.setOrganizer(dao.findById(prefs.getInt("user_id", 0)));
+
+        //NÃO ESTÁ CHEGANDO UM USUÁRIO LOGADO
 
         Log.d("CreateEventActivity", "Event created!");
         Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();

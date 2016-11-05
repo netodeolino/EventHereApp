@@ -16,6 +16,11 @@ import com.facebook.GraphRequest;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.neto.deolino.trabalhoandroid.dao.UserDAO;
+import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +35,15 @@ public class MainActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
+        etMail = (EditText) findViewById(R.id.etMail);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        //btLogin = (LoginButton) findViewById(R.id.btnFb);
+        pbLogin = (ProgressBar) findViewById(R.id.pbLogin);
+        pbLogin.setVisibility(View.GONE);
+
         callbackManager = CallbackManager.Factory.create();
 
+        //NAO ESTA SENDO USADO - FACEBOOK NAO ESTA FUNCIONANDO
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -62,16 +74,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginButtonClicked(View view){
+        String mail = etMail.getText().toString();
+        String password = etPassword.getText().toString();
 
-        // RECUPERAR CADASTRO DO USUARIO NO ARRAYLIST, COMPARAR E FAZER LOGIN
-
-        //String mail = etMail.getText().toString();
-        //String password = etPassword.getText().toString();
-        //if(mail.isEmpty() || password.isEmpty()){
-        //    Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
-        //} else {
-            login();
-        //}
+        List<User> users = new UserDAO().getListAll();
+        if(mail.isEmpty() || password.isEmpty()){
+                Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
+            } else {
+                for (User a : users) {
+                    System.out.println(a.getMail());
+                    System.out.println(a.getPassword());
+                    if ((a.getMail().equals(mail)) && (a.getPassword().equals(password))) {
+                        login();
+                    }
+                }
+            Toast.makeText(MainActivity.this, "ERRO NO LOGIN", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void login(){

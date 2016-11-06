@@ -50,18 +50,43 @@ public class MainActivity extends AppCompatActivity {
         String mail = etMail.getText().toString();
         String password = etPassword.getText().toString();
 
-        List<User> users = new UserDAO().getListAll();
+        /*List<User> users = new UserDAO(this).findAll();
         boolean err = false;
 
         if(mail.isEmpty() || password.isEmpty()){
                 Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
         } else {
             for (User a : users) {
+                System.out.println(a.getName());
+                System.out.println(a.getPassword());
                 if ((a.getMail().equals(mail)) && (a.getPassword().equals(PasswordHelper.md5(password)))) {
                     login();
                     err = true;
                 }
             }
+        }
+        if(err == false){
+            Toast.makeText(MainActivity.this, "ERRO NO LOGIN", Toast.LENGTH_LONG).show();
+        }*/
+        UserDAO uDao = new UserDAO(this);
+        User teste = uDao.findByLogin(PasswordHelper.md5(password));
+        boolean err = false;
+
+        //debug
+        System.out.println(teste.getName());
+        System.out.println(teste.getPassword());
+
+        if(mail.isEmpty() || password.isEmpty()){
+            Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
+        } else {
+            //for (User a : users) {
+                System.out.println(teste.getName());
+                System.out.println(teste.getPassword());
+                if ((teste.getMail().equals(mail)) && (teste.getPassword().equals(PasswordHelper.md5(password)))) {
+                    login();
+                    err = true;
+                }
+            //}
         }
         if(err == false){
             Toast.makeText(MainActivity.this, "ERRO NO LOGIN", Toast.LENGTH_LONG).show();

@@ -44,7 +44,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         }else{
             //Implementação aqui do cadastro
             User user = new User(name, mail, PasswordHelper.md5(password), null);
-            UserDAO userDAO = new UserDAO();
+            UserDAO userDAO = new UserDAO(this);
             userDAO.insert(user);
 
             Toast.makeText(CreateAccountActivity.this, "CADASTRO REALIZADO COM SUCESSO", Toast.LENGTH_LONG).show();

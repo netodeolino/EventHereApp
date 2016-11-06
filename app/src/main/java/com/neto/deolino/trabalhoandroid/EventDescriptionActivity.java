@@ -65,7 +65,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
         super.onResume();
 
         event = new Event();
-        event = new EventDAO().findById(eventID);
+        event = new EventDAO(this).findById(eventID);
 
         tvEventDate.setText(DateHelper.dateToString(event.getDate()));
         tvEventTime.setText(DateHelper.timeToString(event.getDate()));

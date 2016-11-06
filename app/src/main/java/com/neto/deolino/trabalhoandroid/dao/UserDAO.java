@@ -1,61 +1,100 @@
 package com.neto.deolino.trabalhoandroid.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.neto.deolino.trabalhoandroid.enumerations.Gender;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.util.ImgSerializer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by deolino on 05/11/16.
  */
-public class UserDAO {
+public class UserDAO extends AbstractDAO<User> {
 
-    private Context context;
-    static final List<User> usersTemp = new ArrayList<User>();
-
-    public UserDAO(){
+    public UserDAO(Context context) {
+        super(context);
     }
 
-    public UserDAO(Context context){
-        this.context = context;
-    }
-
+    @Override
     public void insert(User user) {
-        usersTemp.add(user);
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", user.getId());
+        values.put("name", user.getName());
+        values.put("mail", user.getMail());
+        values.put("password", user.getPassword());
+        values.put("description", user.getDescription());
+        values.put("gender", user.getGender().ordinal());
+        values.put("image", ImgSerializer.toByteArray(user.getImage()));
+        database.insert("user", null, values);
+        database.close();
     }
 
+    @Override
     public void update(User user) {
-        int index = usersTemp.indexOf(user);
-        if(index >= 0){
-            usersTemp.remove(index);
-            usersTemp.add(user);
-        }
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", user.getName());
+        values.put("mail", user.getMail());
+        values.put("password", user.getPassword());
+        values.put("description", user.getDescription());
+        values.put("gender", user.getGender().ordinal());
+        values.put("image", ImgSerializer.toByteArray(user.getImage()));
+        database.update("user", values, "id=?", new String[]{String.valueOf(user.getId())});
+        database.close();
     }
 
+    @Override
     public void remove(int id) {
-        User bye = new User();
-        bye.setId(id);
-        int index = usersTemp.indexOf(bye);
-        if(index >= 0){
-            usersTemp.remove(index);
-        }
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
+        database.delete("user", "id=?", new String[]{String.valueOf(id)});
+        database.close();
     }
 
+    @Override
     public User findById(int id) {
-        User bye = new User();
-        bye.setId(id);
-
-        int index = usersTemp.indexOf(bye);
-
-        if(index >= 0){
-            return usersTemp.get(index);
-        }
-        return null;
+        ArrayList<User> l = find("id=?", new String[]{String.valueOf(id)});
+        return (l.isEmpty() ? null : l.get(0));
     }
 
-    public List<User> getListAll(){
-        return usersTemp;
+    @Override
+    public ArrayList<User> findAll() {
+        return find(null, null);
+    }
+
+    public User findByMail(String mail) {
+        ArrayList<User> l = find("mail=?", new String[]{mail});
+        return (l.isEmpty() ? null : l.get(0));
+    }
+
+    public User findByLogin(String password) {
+        ArrayList<User> l= find("password=?", new String[]{password});
+        return (l.isEmpty()? null : l.get(0));
+    }
+
+    private ArrayList<User> find(String select, String values[]){
+        ArrayList<User> users = new ArrayList<>();
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = database.query("user", new String[]{"id", "name", "mail", "password", "description", "gender", "image"},
+                select, values, null, null, null);
+        while(cursor.moveToNext()){
+            User user = new User();
+            user.setId(cursor.getInt(0));
+            user.setName(cursor.getString(1));
+            user.setMail(cursor.getString(2));
+            user.setPassword(cursor.getString(3));
+            user.setDescription(cursor.getString(4));
+            user.setGender(Gender.values()[cursor.getInt(5)]);
+            user.setImage(ImgSerializer.fromByteArray(cursor.getBlob(6)));
+            users.add(user);
+        }
+        cursor.close();
+        database.close();
+        return users;
     }
 }

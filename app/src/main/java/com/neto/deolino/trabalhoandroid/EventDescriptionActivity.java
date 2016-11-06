@@ -13,8 +13,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.neto.deolino.trabalhoandroid.dao.EventDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
+import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.util.DateHelper;
 
 /**
  * Created by deolino on 27/10/16.
@@ -22,6 +25,14 @@ import com.neto.deolino.trabalhoandroid.model.User;
 public class EventDescriptionActivity extends AppCompatActivity {
 
     User user;
+
+    ListView personsParticipatingListView;
+    TextView tvEventDate;
+    TextView tvEventTime;
+    ImageView ivEventType;
+    TextView tvEventStart;
+    TextView tvEventEnd;
+    TextView tvEventDescription;
 
     Context context;
     Intent intent;
@@ -41,6 +52,12 @@ public class EventDescriptionActivity extends AppCompatActivity {
         //get from intent
         eventID = intent.getIntExtra("eventID", 0 );
         event = new Event();
+        personsParticipatingListView = (ListView) findViewById(R.id.lvPersonsInEvent);
+        tvEventDate = (TextView) findViewById(R.id.tvEventTime);
+        tvEventTime = (TextView) findViewById(R.id.tvEventDate);
+        ivEventType = (ImageView) findViewById(R.id.ivEventType);
+        tvEventStart = (TextView) findViewById(R.id.tvEventStart);
+        tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
     }
 
     @Override
@@ -48,6 +65,16 @@ public class EventDescriptionActivity extends AppCompatActivity {
         super.onResume();
 
         event = new Event();
+        event = new EventDAO().findById(eventID);
+
+        tvEventDate.setText(DateHelper.dateToString(event.getDate()));
+        tvEventTime.setText(DateHelper.timeToString(event.getDate()));
+        EventType.Type type = event.getType().getType();
+        int img = (type==EventType.Type.HIKE) ? R.drawable.hike : (type==EventType.Type.RUN) ? R.drawable.running : R.drawable.bike;
+        ivEventType.setImageResource(img);
+        tvEventStart.setText(event.getDeparture().getAddress());
+        tvEventEnd.setText(event.getArrival().getAddress());
+        tvEventDescription.setText(event.getDescription());
     }
 
     private void populatePersonsList(){

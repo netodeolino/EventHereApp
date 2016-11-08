@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by deolino on 27/10/16.
@@ -52,12 +55,18 @@ public class EventDescriptionActivity extends AppCompatActivity {
         //get from intent
         eventID = intent.getIntExtra("eventID", 0 );
         event = new Event();
+
         personsParticipatingListView = (ListView) findViewById(R.id.lvPersonsInEvent);
         tvEventDate = (TextView) findViewById(R.id.tvEventTime);
         tvEventTime = (TextView) findViewById(R.id.tvEventDate);
         ivEventType = (ImageView) findViewById(R.id.ivEventType);
         tvEventStart = (TextView) findViewById(R.id.tvEventStart);
         tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
+        pbEventDescription = (ProgressBar) findViewById(R.id.pbEventDescription);
+
+        tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
+        tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
+        populatePersonsList();
     }
 
     @Override
@@ -78,7 +87,28 @@ public class EventDescriptionActivity extends AppCompatActivity {
     }
 
     private void populatePersonsList(){
-
+        pbEventDescription.setVisibility(View.GONE);
+        User organizer = event.getOrganizer();
+        //Construct data source
+        ArrayList<User> participants = new ArrayList<>();
+        ArrayList<User> arrayOfUsers = event.getConfirmedUsers();
+        // add organizer first to list
+        participants.add(organizer);
+        arrayOfUsers.remove(organizer);
+        Log.d("EventDescriptionActivit", organizer.getName());
+        // if user is attending add user second
+        if (event.getConfirmedUsers().contains(user) && user.equals(organizer)) {
+            participants.add(1, user);
+            arrayOfUsers.remove(user);
+        }
+        // add rest of participants
+        if (arrayOfUsers.size() > 0) {
+            participants.addAll(arrayOfUsers);
+        }
+        //Create the adapter to convert the array to views
+        //PersonAdapter adapter = new PersonAdapter(getApplicationContext(), event.getConfirmedUsers(), PersonAdapter.LIST_USERS_EVENT, event.getOrganizer().getId(), eventID);
+        //attach the adapter to the listview
+        //personsParticipatingListView.setAdapter(adapter);
     }
 
     /*

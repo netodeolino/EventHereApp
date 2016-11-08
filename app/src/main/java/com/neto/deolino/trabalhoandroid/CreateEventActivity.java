@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.neto.deolino.trabalhoandroid.dao.EventDAO;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
@@ -172,14 +173,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     }
 
     public void createEventButtonPressed(View view) {
+        Log.d("CreateEventActivity", "Create Button pressed");
         Toast.makeText(context, R.string.creating_event, Toast.LENGTH_LONG).show();
         event = new Event();
-        /*Intent intent = new Intent(context, EventDescriptionActivity.class);
-        intent.putExtra("eventID", 0); //teste
-        startActivity(intent);*/
-
-
-        Log.d("CreateEventActivity", "Create Button pressed");
 
         event.setType(mType);
 //        event.setDeparture(new Location(startLocationStr,this));
@@ -196,8 +192,10 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
         UserDAO dao = new UserDAO(this);
         event.setOrganizer(dao.findById(prefs.getInt("user_id", 0)));
+        dao.close();
 
-        //NÃO ESTÁ CHEGANDO UM USUÁRIO LOGADO
+        EventDAO eventDAO = new EventDAO(this);
+        eventDAO.insert(event);
 
         Log.d("CreateEventActivity", "Event created!");
         Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();

@@ -105,6 +105,9 @@ public class EventDescriptionActivity extends AppCompatActivity {
         if (arrayOfUsers.size() > 0) {
             participants.addAll(arrayOfUsers);
         }
+
+        /* PRECISA FAZER ESSA PARTE DO PERSONADAPTER DEPOIS */
+
         //Create the adapter to convert the array to views
         //PersonAdapter adapter = new PersonAdapter(getApplicationContext(), event.getConfirmedUsers(), PersonAdapter.LIST_USERS_EVENT, event.getOrganizer().getId(), eventID);
         //attach the adapter to the listview

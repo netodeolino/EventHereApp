@@ -113,8 +113,8 @@ public class UserDerscriptionActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menuMyEvents:
-               // intent = new Intent(this, MyEventsActivity.class);
-                //startActivity(intent);
+                intent = new Intent(this, MyEventsActivity.class);
+                startActivity(intent);
             default:
                 finish();
         }
@@ -131,6 +131,8 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             editor.remove("sex");
             editor.remove("description");
             editor.apply();
+
+            getChoosenAccount();
         }
     }
 }

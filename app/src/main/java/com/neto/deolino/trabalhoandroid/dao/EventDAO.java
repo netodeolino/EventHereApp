@@ -1,7 +1,13 @@
 package com.neto.deolino.trabalhoandroid.dao;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.util.DateHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,48 +15,106 @@ import java.util.List;
 /**
  * Created by deolino on 05/11/16.
  */
-public class EventDAO {
+public class EventDAO extends AbstractDAO<Event> {
 
-    List<Event> eventsTemp = new ArrayList<Event>();
+    private EventTypeDAO etDao;
+    private LocationDAO lDao;
 
-    public EventDAO(){
-
+    public EventDAO(Context context) {
+        super(context);
+        this.etDao = new EventTypeDAO(context);
+        this.lDao = new LocationDAO(context);
     }
 
+    @Override
     public void insert(Event event) {
-        eventsTemp.add(event);
+        lDao.insert(event.getArrival());
+        lDao.insert(event.getDeparture());
+        etDao.insert(event.getType());
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", event.getId());
+        values.put("type_id", event.getType().getId());
+        values.put("date", DateHelper.toFormatString(event.getDate()));
+        values.put("departure_id", event.getDeparture().getId());
+        values.put("arrival_id", event.getArrival().getId());
+        values.put("description", event.getDescription());
+        values.put("secret", event.isSecret() ? 1 : 0);
+        values.put("organizer_id", event.getOrganizer().getId());
+        values.put("over", event.isOver() ? 1 : 0);
+        database.insert("event", null, values);
+        database.close();
     }
 
+    @Override
     public void update(Event event) {
-        int index = eventsTemp.indexOf(event);
-        if(index >= 0){
-            eventsTemp.remove(index);
-            eventsTemp.add(event);
-        }
+        lDao.update(event.getArrival());
+        lDao.update(event.getDeparture());
+        etDao.update(event.getType());
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("type_id", event.getType().getId());
+        values.put("date", DateHelper.toFormatString(event.getDate()));
+        values.put("departure_id", event.getDeparture().getId());
+        values.put("arrival_id", event.getArrival().getId());
+        values.put("description", event.getDescription());
+        values.put("secret", event.isSecret() ? 1 : 0);
+        values.put("organizer_id", event.getOrganizer().getId());
+        values.put("over", event.isOver() ? 1 : 0);
+        database.update("event", values, "id=?", new String[]{String.valueOf(event.getId())});
+        database.close();
     }
 
+    @Override
     public void remove(int id) {
-        Event bye = new Event();
-        bye.setId(id);
-
-        int index = eventsTemp.indexOf(bye);
-        if(index >= 0){
-            eventsTemp.remove(index);
-        }
+        Event event = this.findById(id);
+        lDao.remove(event.getArrival().getId());
+        lDao.remove(event.getDeparture().getId());
+        etDao.remove(event.getType().getId());
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
+        database.delete("event", "id=?", new String[]{String.valueOf(id)});
+        database.close();
     }
 
+    @Override
     public Event findById(int id) {
-        Event bye = new Event();
-        bye.setId(id);
-
-        int index = eventsTemp.indexOf(bye);
-        if(index >= 0){
-            return eventsTemp.get(index);
-        }
-        return null;
+        ArrayList<Event> l = find("id=?", new String[]{String.valueOf(id)});
+        return (l.isEmpty() ? null : l.get(0));
     }
 
-    public List<Event> listAll(){
-        return eventsTemp;
+    @Override
+    public ArrayList<Event> findAll() {
+        return find(null, null);
+    }
+
+    private ArrayList<Event> find(String select, String values[]){
+        ArrayList<Event> events = new ArrayList<>();
+        SQLiteDatabase database = this.mySQLiteOpenHelper.getReadableDatabase();
+        Cursor cursor = database.query("event", new String[]{"id", "type_id", "date", "departure_id", "arrival_id", "description", "secret", "organizer_id", "over"},
+                select, values, null, null, null);
+        while(cursor.moveToNext()){
+            Event event = new Event();
+            event.setOrganizer(new User());
+            event.setId(cursor.getInt(0));
+            event.setType(etDao.findById(cursor.getInt(1)));
+            event.setDate(DateHelper.toDate(cursor.getString(2)));
+            event.setDeparture(lDao.findById(cursor.getInt(3)));
+            event.setArrival(lDao.findById(cursor.getInt(4)));
+            event.setDescription(cursor.getString(5));
+            event.setSecret(cursor.getInt(6) == 1);
+            event.getOrganizer().setId(cursor.getInt(7));
+            event.setOver(cursor.getInt(8) == 1);
+            events.add(event);
+        }
+        cursor.close();
+        database.close();
+        return events;
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        lDao.close();
+        etDao.close();
     }
 }

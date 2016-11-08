@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trabalho Android</string>
+    <string name="app_name">EventHere</string>
 
     <string name="createEventActivityLabel">Create Event</string>
     <string name="searchEventsActivityLabel">Search Events</string>

@@ -20,7 +20,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.enumerations.Gender;
+import com.neto.deolino.trabalhoandroid.model.User;
 
 /**
  * Created by deolino on 30/10/16.
@@ -34,6 +36,7 @@ public class EditAccountActivity extends AppCompatActivity {
     EditText etDescription;
     RadioGroup rgSex;
     Bitmap image;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,13 @@ public class EditAccountActivity extends AppCompatActivity {
         rgSex = (RadioGroup) findViewById(R.id.rgSex);
         etDescription = (EditText) findViewById(R.id.etUserDescription);
 
+        UserDAO dao = new UserDAO(this);
+        user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
+        dao.close();
+
+        etName.setText(user.getName());
+        etDescription.setText(user.getDescription());
+        rgSex.check(user.getGender().equals(Gender.MALE) ? R.id.rbMale : R.id.rbFemale);
     }
 
     @Override

@@ -24,6 +24,7 @@ import java.util.ArrayList;
  */
 public class DashboardActivity extends AppCompatActivity {
 
+    User user;
     ListView recentEventsListView;
     Context context;
     int eventID;
@@ -33,7 +34,11 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+        recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+
+        UserDAO dao = new UserDAO(this);
+        this.user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0));
+        dao.close();
 
         context = this;
 

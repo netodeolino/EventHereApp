@@ -24,7 +24,7 @@ public class UserDAO extends AbstractDAO<User> {
     public void insert(User user) {
         SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id", user.getId());
+        //values.put("id", user.getId());
         values.put("name", user.getName());
         values.put("mail", user.getMail());
         values.put("password", user.getPassword());
@@ -73,7 +73,7 @@ public class UserDAO extends AbstractDAO<User> {
     }
 
     public User findByLogin(String password) {
-        ArrayList<User> l= find("password=?", new String[]{password});
+        ArrayList<User> l = find("password=?", new String[]{password});
         return (l.isEmpty()? null : l.get(0));
     }
 

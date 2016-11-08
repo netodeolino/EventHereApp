@@ -47,7 +47,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             UserDAO userDAO = new UserDAO(this);
             userDAO.insert(user);
 
-            Toast.makeText(CreateAccountActivity.this, "CADASTRO REALIZADO COM SUCESSO", Toast.LENGTH_LONG).show();
+            Toast.makeText(CreateAccountActivity.this, getString(R.string.registration_completed), Toast.LENGTH_LONG).show();
             finish();
         }
     }

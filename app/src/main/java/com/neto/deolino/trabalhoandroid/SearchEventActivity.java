@@ -50,7 +50,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     Date searchDate = new Date();
 
-    //private EventType mType;
+    //private EventTypeDAO mType;
 
     //ArrayList<Event> arrayOfEvents;
 
@@ -74,7 +74,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         rbChecked = (RadioButton) findViewById(R.id.rbSBike);
         etKm = (EditText) findViewById(R.id.etKm);
 
-     //   mType = new EventType();
+     //   mType = new EventTypeDAO();
 
         searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -110,7 +110,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         rgEventType.check(typeInt);
 
         int t = rgEventType.getCheckedRadioButtonId();
-        //mType.setType(t==R.id.rbSBike ? EventType.Type.BIKE : t==R.id.rbSRun ? EventType.Type.RUN : EventType.Type.HIKE);
+        //mType.setType(t==R.id.rbSBike ? EventTypeDAO.Type.BIKE : t==R.id.rbSRun ? EventTypeDAO.Type.RUN : EventTypeDAO.Type.HIKE);
 
         //btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         //btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));

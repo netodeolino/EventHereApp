@@ -1,12 +1,22 @@
 package com.neto.deolino.trabalhoandroid;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.neto.deolino.trabalhoandroid.dao.UserDAO;
+import com.neto.deolino.trabalhoandroid.model.Event;
+import com.neto.deolino.trabalhoandroid.model.User;
+
+import java.util.ArrayList;
 
 
 /**
@@ -14,18 +24,26 @@ import android.widget.ListView;
  */
 public class DashboardActivity extends AppCompatActivity {
 
+    User user;
     ListView recentEventsListView;
+    Context context;
+    int eventID;
+    final ArrayList<Event> arrayOfEvents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+        recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
 
-        //context = this;
+        UserDAO dao = new UserDAO(this);
+        this.user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0));
+        dao.close();
+
+        context = this;
 
         // When an item in the list is clicked
-        /*recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("DashboardActivity", "Item " + position + " clicked");
@@ -35,10 +53,9 @@ public class DashboardActivity extends AppCompatActivity {
                 intent.putExtra("eventID", eventID);
                 startActivity(intent);
             }
-        });*/
+        });
 //        populateEventsList();
     }
-
 
     private void populateEventsList() {
         //Construct data source
@@ -82,7 +99,6 @@ public class DashboardActivity extends AppCompatActivity {
                 intent = new Intent(this, UserDerscriptionActivity.class);
                 startActivity(intent);
                 break;
-
             case R.id.menuMyEvents:
                 startActivity(new Intent(this, MyEventsActivity.class));
                 break;

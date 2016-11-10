@@ -14,6 +14,9 @@ import java.util.ArrayList;
  */
 
 public class EventTypeDAO extends AbstractDAO<EventType>{
+ * Created by deolino on 06/11/16.
+ */
+class EventTypeDAO extends AbstractDAO<EventType> {
 
     public EventTypeDAO(Context context) {
         super(context);

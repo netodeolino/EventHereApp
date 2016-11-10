@@ -11,6 +11,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "bike_routes";
+ * Created by deolino on 06/11/16.
+ */
+public class MySQLiteOpenHelper extends SQLiteOpenHelper {
+
+    public static final String DATABASE_NAME = "event_here";
 
     public MySQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -29,17 +34,20 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "organizer_id INTEGER,"+
                 "over INTEGER"+
                 ");";
+
         String tableEventType = "CREATE TABLE event_type (" +
                 "  id INTEGER PRIMARY KEY NOT NULL," +
                 "  type INTEGER," +
                 "  specification TEXT" +
                 "); ";
+
         String tableLocation = "CREATE TABLE location (" +
                 "  id INTEGER PRIMARY KEY NOT NULL," +
                 "  latitude REAL," +
                 "  longitude REAL," +
                 "  address TEXT" +
                 ");";
+
         String tableUser = "CREATE TABLE user (" +
                 "  id INTEGER PRIMARY KEY NOT NULL," +
                 "  name TEXT," +
@@ -49,9 +57,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "  gender INTEGER," +
                 "  image BLOB" +
                 "); ";
+
         String insert1 = "INSERT INTO event_type VALUES (1, 0, 'BIKE')";
         String insert2 = "INSERT INTO event_type VALUES (2, 1, 'HIKE')";
         String insert3 = "INSERT INTO event_type VALUES (3, 2, 'RUN')";
+
         db.execSQL(tableEvent);
         db.execSQL(tableEventType);
         db.execSQL(tableLocation);
@@ -62,6 +72,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 }

@@ -19,8 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.enumerations.Gender;
+import com.neto.deolino.trabalhoandroid.model.User;
 
 /**
  * Created by deolino on 30/10/16.
@@ -34,6 +37,7 @@ public class EditAccountActivity extends AppCompatActivity {
     EditText etDescription;
     RadioGroup rgSex;
     Bitmap image;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,13 @@ public class EditAccountActivity extends AppCompatActivity {
         rgSex = (RadioGroup) findViewById(R.id.rgSex);
         etDescription = (EditText) findViewById(R.id.etUserDescription);
 
+        UserDAO dao = new UserDAO(this);
+        user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
+        dao.close();
+
+        etName.setText(user.getName());
+        etDescription.setText(user.getDescription());
+        rgSex.check(user.getGender().equals(Gender.MALE) ? R.id.rbMale : R.id.rbFemale);
     }
 
     @Override
@@ -126,14 +137,23 @@ public class EditAccountActivity extends AppCompatActivity {
 
 
     public void saveButtonClicked(View view){
-        Intent intent;
-       // user.setGender(rgSex.getCheckedRadioButtonId()==R.id.rbMale ? Gender.MALE : Gender.FEMALE);
+        //Intent intent;
+        user.setGender(rgSex.getCheckedRadioButtonId()==R.id.rbMale ? Gender.MALE : Gender.FEMALE);
         String name = etName.getText().toString();
         String description = etDescription.getText().toString();
-        intent = new Intent(this, UserDerscriptionActivity.class);
-        startActivity(intent);
-       // if(!name.isEmpty()) user.setName(name);
-        //if(!description.isEmpty()) user.setDescription(description);
-        //if(image != null) user.setImage(image);
+
+        if(!name.isEmpty()) user.setName(name);
+        if(!description.isEmpty()) user.setDescription(description);
+        if(image != null) user.setImage(image);
+
+        UserDAO dao = new UserDAO(getApplicationContext());
+        dao.update(user);
+        dao.close();
+
+        //intent = new Intent(this, UserDerscriptionActivity.class);
+        //startActivity(intent);
+
+        Toast.makeText(EditAccountActivity.this, R.string.update_account_confirmed, Toast.LENGTH_LONG).show();
+        finish();
     }
 }

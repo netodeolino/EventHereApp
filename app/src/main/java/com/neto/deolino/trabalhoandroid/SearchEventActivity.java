@@ -21,7 +21,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-
+import com.neto.deolino.trabalhoandroid.model.Event;
+import com.neto.deolino.trabalhoandroid.model.EventType;
+import com.neto.deolino.trabalhoandroid.util.Constants;
+import com.neto.deolino.trabalhoandroid.util.DateHelper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,9 +53,9 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     Date searchDate = new Date();
 
-    //private EventTypeDAO mType;
+    private EventType mType;
 
-    //ArrayList<Event> arrayOfEvents;
+    ArrayList<Event> arrayOfEvents;
 
     int eventID;
 
@@ -74,18 +77,18 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         rbChecked = (RadioButton) findViewById(R.id.rbSBike);
         etKm = (EditText) findViewById(R.id.etKm);
 
-     //   mType = new EventTypeDAO();
+        mType = new EventType();
 
         searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("SearchEventActivity", "Item " + position + " clicked");
 
-                //eventID = arrayOfEvents.get(position).getId();
+                eventID = arrayOfEvents.get(position).getId();
                 Log.d("SearchEventActivity", "eventID 1: " + eventID);
-                //Intent intent = new Intent(context, EventDescriptionActivity.class);
-                //intent.putExtra("eventID", eventID );
-                //startActivity(intent);
+                Intent intent = new Intent(context, EventDescriptionActivity.class);
+                intent.putExtra("eventID", eventID );
+                startActivity(intent);
             }
         });
 
@@ -110,10 +113,10 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         rgEventType.check(typeInt);
 
         int t = rgEventType.getCheckedRadioButtonId();
-        //mType.setType(t==R.id.rbSBike ? EventTypeDAO.Type.BIKE : t==R.id.rbSRun ? EventTypeDAO.Type.RUN : EventTypeDAO.Type.HIKE);
+        mType.setType(t==R.id.rbSBike ? EventType.Type.BIKE : t==R.id.rbSRun ? EventType.Type.RUN : EventType.Type.HIKE);
 
-        //btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
-        //btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
+        btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
+        btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         etKm.setText(prefs.getString("km", "1"));
         searchLocationStr = prefs.getString("location", getString(R.string.choose_a_location));
         tvAddress.setText(searchLocationStr);
@@ -149,7 +152,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
         Log.w("CreateEventActivity","SearchDate = " + searchDate.toString());
 
-        //dateString = DateHelper.dateToMySQLFormat(searchDate);
+        dateString = DateHelper.dateToMySQLFormat(searchDate);
 
         btnSEventDate.setText(String.format(getString(R.string.date), dateString));
     }
@@ -161,7 +164,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         searchDate.setHours(hourOfDay);
         searchDate.setMinutes(minute);
 
-        //timeString = DateHelper.timeToMySQLFormat(searchDate);
+        timeString = DateHelper.timeToMySQLFormat(searchDate);
 
         btnSEventTime.setText(String.format(getString(R.string.time), timeString));
     }

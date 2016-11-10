@@ -16,6 +16,9 @@ import java.util.ArrayList;
  */
 
 public class UserDAO extends AbstractDAO<User>{
+ * Created by deolino on 05/11/16.
+ */
+public class UserDAO extends AbstractDAO<User> {
 
     public UserDAO(Context context) {
         super(context);
@@ -25,7 +28,7 @@ public class UserDAO extends AbstractDAO<User>{
     public void insert(User user) {
         SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id", user.getId());
+        //values.put("id", user.getId());
         values.put("name", user.getName());
         values.put("mail", user.getMail());
         values.put("password", user.getPassword());
@@ -63,11 +66,19 @@ public class UserDAO extends AbstractDAO<User>{
         return (l.isEmpty() ? null : l.get(0));
     }
 
+    @Override
+    public ArrayList<User> findAll() {
+        return find(null, null);
+    }
+
     public User findByMail(String mail) {
         ArrayList<User> l = find("mail=?", new String[]{mail});
         return (l.isEmpty() ? null : l.get(0));
     }
 
+    public User findByLogin(String password) {
+        ArrayList<User> l = find("password=?", new String[]{password});
+        return (l.isEmpty()? null : l.get(0));
     @Override
     public ArrayList<User> findAll() {
         return find(null, null);

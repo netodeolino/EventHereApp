@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!-- android:icon="@drawable/ic_action_my_profile" -->
     <item
         android:id="@+id/menuMyAccount"
-        android:icon="@drawable/ic_action_my_profile"
         android:title="@string/my_account"
         android:visible="true"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 
+    <!--android:icon="@drawable/ic_setting_dark-->
     <item
         android:id="@+id/menuSettings"
-        android:icon="@drawable/ic_setting_dark"
         android:title="@string/title_activity_settings"
         android:visible="true"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/menuMyEvents"

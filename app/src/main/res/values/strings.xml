@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trabalho Android</string>
+    <string name="app_name">EventHere</string>
 
     <string name="createEventActivityLabel">Create Event</string>
     <string name="searchEventsActivityLabel">Search Events</string>
@@ -143,8 +143,10 @@
     <string name="password_changed">Password successfully changed! Check your mail.</string>
     <string name="error_user_not_found">Account not found.</string>
 
+    <!-- FACEBOOK -->
     <string name="facebook_error">Error connecting to facebook</string>
-    <string name="facebook_app_id" translatable="false">540733856113131</string>
+    <string name="facebook_app_id">205423816564802</string>
+
 
     <string name="neto_deolino" translatable="false">Neto Deolino</string>
     <string name="matheus_pereira" translatable="false">Matheus Pereira</string>

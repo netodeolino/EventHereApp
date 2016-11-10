@@ -17,15 +17,21 @@ import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.neto.deolino.trabalhoandroid.dao.EventDAO;
+import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
+import com.neto.deolino.trabalhoandroid.model.Location;
+import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by deolino on 27/10/16.
@@ -36,6 +42,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     TextView tvStart;
     TextView tvEnd;
 
+    Context context;
+
     Button btnEventDate;
     Button btnEventTime;
 
@@ -43,8 +51,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     TextView tvDescription;
 
     CheckBox cbSecret;
-
-    Context context;
 
     Date date = new Date();
 
@@ -110,7 +116,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         rgEventType.check(typeInt);
 
         int t = rgEventType.getCheckedRadioButtonId();
-        mType.setType(t==R.id.rbBike ? EventType.Type.BIKE : t==R.id.rbRun ? EventType.Type.RUN : EventType.Type.HIKE);
+        mType.setType(t == R.id.rbBike ? EventType.Type.BIKE : t == R.id.rbRun ? EventType.Type.RUN : EventType.Type.HIKE);
 
         startLocationStr = prefs.getString("start", "Choose a location");
         tvStart.setText(startLocationStr);
@@ -147,7 +153,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         date.setMonth(monthOfYear);
         date.setYear(year);
 
-        Log.w("CreateEventActivity","Date = " + date.toString());
+        Log.w("CreateEventActivity", "Date = " + date.toString());
 
         String dateString = DateHelper.dateToString(date);
 
@@ -156,7 +162,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Log.w("CreateEventActivity","Time = " + hourOfDay + ":" + minute);
+        Log.w("CreateEventActivity", "Time = " + hourOfDay + ":" + minute);
 
         date.setHours(hourOfDay);
         date.setMinutes(minute);
@@ -166,10 +172,38 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         btnEventTime.setText(String.format(getString(R.string.time), timeString));
     }
 
-    public void createEventButtonPressed(View view){
-        /*Intent intent = new Intent(context, EventDescriptionActivity.class);
-        intent.putExtra("eventID", 0); //teste
-        startActivity(intent);*/
-        startActivity(new Intent(this, EventDescriptionActivity.class));
+    public void createEventButtonPressed(View view) {
+        Log.d("CreateEventActivity", "Create Button pressed");
+        Toast.makeText(context, R.string.creating_event, Toast.LENGTH_LONG).show();
+        event = new Event();
+
+        event.setType(mType);
+//        event.setDeparture(new Location(startLocationStr,this));
+//        event.setArrival(new Location(endLocationStr,this));
+        Log.d("CreateEventActivity", "StartLL: " + startLat + "," + startLong);
+        Log.d("CreateEventActivity", "EndLL: " + endLat + ":" + endLong);
+        event.setDeparture(Location.getLocationFromCoordinates(startLat, startLong, context));
+        event.setArrival(Location.getLocationFromCoordinates(endLat, endLong, context));
+
+        event.setSecret(cbSecret.isChecked());
+        event.setDate(date);
+        event.setDescription(tvDescription.getText().toString());
+        event.setOver(false);
+
+        UserDAO dao = new UserDAO(this);
+        event.setOrganizer(dao.findById(prefs.getInt("user_id", 0)));
+        dao.close();
+
+        EventDAO eventDAO = new EventDAO(this);
+        eventDAO.insert(event);
+
+        Log.d("CreateEventActivity", "Event created!");
+        Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();
+        int eventID = event.getId();
+        Intent intent = new Intent(context, EventDescriptionActivity.class);
+        intent.putExtra("eventID", eventID);
+        startActivity(intent);
+
+        //startActivity(new Intent(this, EventDescriptionActivity.class));
     }
 }

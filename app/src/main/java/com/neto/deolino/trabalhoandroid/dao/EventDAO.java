@@ -15,6 +15,11 @@ import java.util.ArrayList;
  * Created by matheus on 07/11/16.
  */
 
+import java.util.List;
+
+/**
+ * Created by deolino on 05/11/16.
+ */
 public class EventDAO extends AbstractDAO<Event> {
 
     private EventTypeDAO etDao;

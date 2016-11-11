@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "event_here";
+    public static final String DATABASE_NAME = "bike_routes";
 
     public MySQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -67,6 +67,6 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 }

@@ -20,7 +20,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.neto.deolino.trabalhoandroid.adapters.EventAdapter2;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.util.Constants;
@@ -124,7 +126,8 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     private void populateEventsList() {
-
+        EventAdapter2 adapter = new EventAdapter2(this, arrayOfEvents);
+        searchResultListView.setAdapter(adapter);
     }
 
     public void showTimePickerDialog(View v) {
@@ -170,6 +173,19 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     public void searchButtonClicked(View view) {
+        Log.d("SearchEventActivity", "Search Button pressed");
 
+        int distance = Integer.parseInt(etKm.getText().toString());
+        if (distance > 2147483647) {
+            distance = 2147483647;
+        }
+        if (distance < 0) {
+            distance = 0;
+        }
+
+        arrayOfEvents = new ArrayList<>();
+        //ok
+        populateEventsList();
+        Log.d("SearchEventActivity", "Event searched!");
     }
 }

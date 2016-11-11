@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by matheus on 07/11/16.
  */
 
+
 public abstract class AbstractDAO<T> {
 
     private Context context;

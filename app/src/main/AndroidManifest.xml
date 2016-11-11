@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neto.deolino.trabalhoandroid">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +16,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,143 +27,144 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--
+        <!--
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
--->
+        -->
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.CreateAccountActivity"
+            android:name=".CreateAccountActivity"
             android:label="@string/createAccountActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.DashboardActivity"
+            android:name=".DashboardActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.ResetPasswordActivity"
+            android:name=".ResetPasswordActivity"
             android:label="@string/app_name"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.MainActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.SearchEventActivity"
+            android:name=".SearchEventActivity"
             android:label="@string/searchEventsActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.EventDescriptionActivity">
+            android:parentActivityName=".EventDescriptionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.CreateEventActivity"
+            android:name=".CreateEventActivity"
             android:label="@string/createEventActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.EventDescriptionActivity"
+            android:name=".EventDescriptionActivity"
             android:label="@string/eventDescriptionActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.MyEventsActivity"
+            android:name=".MyEventsActivity"
             android:label="@string/myEventsActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.EventDescriptionActivity" />
         </activity>
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity"
+            android:name=".UserDerscriptionActivity"
             android:label="@string/UserDescriptionActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.EditAccountActivity"
+            android:name=".EditAccountActivity"
             android:label="@string/UserDescriptionActivityLabel"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity">
+            android:parentActivityName=".UserDerscriptionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity" />
         </activity>
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.MyFriendsActivity"
+            android:name=".MyFriendsActivity"
             android:label="@string/my_friends"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity">
+            android:parentActivityName=".UserDerscriptionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.UserDerscriptionActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.AddFriendsActivity"
+            android:name=".AddFriendsActivity"
             android:label="@string/add_friends"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.MyFriendsActivity">
+            android:parentActivityName=".MyFriendsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.MyFriendsActivity" />
         </activity>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.MapsActivity"
+            android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.CreditActivity"
+            android:name=".CreditActivity"
             android:label="@string/title_activity_credit"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.MySettingsActivity"
+            android:name=".MySettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.DashboardActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.DashboardActivity" />
         </activity>
-
         <activity
-            android:name="com.neto.deolino.trabalhoandroid.InviteActivity"
+            android:name=".InviteActivity"
             android:label="Invite to the event"
-            android:parentActivityName="com.neto.deolino.trabalhoandroid.EventDescriptionActivity">
+            android:parentActivityName=".EventDescriptionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.EventDescriptionActivity" />
         </activity>
-
+        <activity
+            android:name=".MapsActivityOk"
+            android:label="@string/title_activity_maps_ok"></activity>
     </application>
+
+    <service android:name=".service.CreateAccountService"
+        android:enabled="true"
+        android:exported="true" />
+
 </manifest>

@@ -12,10 +12,6 @@ import com.neto.deolino.trabalhoandroid.util.ImgSerializer;
 import java.util.ArrayList;
 
 /**
- * Created by matheus on 07/11/16.
- */
-
-public class UserDAO extends AbstractDAO<User>{
  * Created by deolino on 05/11/16.
  */
 public class UserDAO extends AbstractDAO<User> {
@@ -79,9 +75,6 @@ public class UserDAO extends AbstractDAO<User> {
     public User findByLogin(String password) {
         ArrayList<User> l = find("password=?", new String[]{password});
         return (l.isEmpty()? null : l.get(0));
-    @Override
-    public ArrayList<User> findAll() {
-        return find(null, null);
     }
 
     private ArrayList<User> find(String select, String values[]){

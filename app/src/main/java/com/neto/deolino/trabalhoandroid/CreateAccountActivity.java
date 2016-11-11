@@ -1,5 +1,6 @@
 package com.neto.deolino.trabalhoandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.CreateAccountService;
 import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
 
 /**
@@ -46,6 +48,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             User user = new User(name, mail, PasswordHelper.md5(password), null);
             UserDAO userDAO = new UserDAO(this);
             userDAO.insert(user);
+            startService(new Intent(this, CreateAccountService.class));
 
             Toast.makeText(CreateAccountActivity.this, getString(R.string.registration_completed), Toast.LENGTH_LONG).show();
             finish();

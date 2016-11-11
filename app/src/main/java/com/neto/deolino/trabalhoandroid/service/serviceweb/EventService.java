@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid.service;
+package com.neto.deolino.trabalhoandroid.service.serviceweb;
 
 import com.neto.deolino.trabalhoandroid.interfaces.AsyncExecutable;
 import com.neto.deolino.trabalhoandroid.model.Event;

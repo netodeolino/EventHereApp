@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid.service;
+package com.neto.deolino.trabalhoandroid.service.serviceweb;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 

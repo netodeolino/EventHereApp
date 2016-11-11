@@ -208,4 +208,5 @@
     <string name="already_participating">You are already participating</string>
     <string name="participated">You participated in the event</string>
     <string name="creating_event">Creating event</string>
+    <string name="title_activity_maps_ok">Map</string>
 </resources>

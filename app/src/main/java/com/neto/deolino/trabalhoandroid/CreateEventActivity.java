@@ -19,12 +19,16 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.neto.deolino.trabalhoandroid.dao.EventDAO;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.util.Constants;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;
@@ -146,6 +150,32 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    public void selectLocationButtonPressed(View view){
+        Log.d("CreateEventActivity", "Location Button pressed");
+
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            if(view.getId() == R.id.btnStartLocation || view.getId() == R.id.tvEventStart){
+                startActivityForResult(builder.build(this), Constants.PLACE_PICKER_START_REQUEST);
+            }
+            else if(view.getId() == R.id.btnEndLocation || view.getId() == R.id.tvEventEnd){
+                startActivityForResult(builder.build(this), Constants.PLACE_PICKER_END_REQUEST);
+            }
+
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            Toast.makeText(this, "Google Play Services is not available.",
+                    Toast.LENGTH_LONG)
+                    .show();
+        }
+
+    }
+
+
+
+
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
@@ -178,8 +208,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         event = new Event();
 
         event.setType(mType);
-//        event.setDeparture(new Location(startLocationStr,this));
-//        event.setArrival(new Location(endLocationStr,this));
+        event.setDeparture(new Location(startLocationStr,this));
+        event.setArrival(new Location(endLocationStr,this));
         Log.d("CreateEventActivity", "StartLL: " + startLat + "," + startLong);
         Log.d("CreateEventActivity", "EndLL: " + endLat + ":" + endLong);
         event.setDeparture(Location.getLocationFromCoordinates(startLat, startLong, context));
@@ -204,6 +234,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         intent.putExtra("eventID", eventID);
         startActivity(intent);
 
-        //startActivity(new Intent(this, EventDescriptionActivity.class));
+        startActivity(new Intent(this, EventDescriptionActivity.class));
     }
 }

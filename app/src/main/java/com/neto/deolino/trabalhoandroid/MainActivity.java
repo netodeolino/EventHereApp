@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         if(err == false){
             Toast.makeText(MainActivity.this,getString(R.string.error_incorrect_data_login), Toast.LENGTH_LONG).show();
         }
-        //login();
+        login();
     }
 
     public void login() {

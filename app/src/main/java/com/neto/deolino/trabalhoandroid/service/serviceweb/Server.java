@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid.service;
+package com.neto.deolino.trabalhoandroid.service.serviceweb;
 
 /**
  * Created by matheus on 09/11/16.

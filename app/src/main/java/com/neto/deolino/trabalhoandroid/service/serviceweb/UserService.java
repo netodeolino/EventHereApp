@@ -1,7 +1,9 @@
-package com.neto.deolino.trabalhoandroid.service;
+package com.neto.deolino.trabalhoandroid.service.serviceweb;
 
 import com.neto.deolino.trabalhoandroid.interfaces.AsyncExecutable;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.serviceweb.Abstract;
+import com.neto.deolino.trabalhoandroid.service.serviceweb.Server;
 import com.neto.deolino.trabalhoandroid.util.ImgSerializer;
 import com.neto.deolino.trabalhoandroid.util.JsonParser;
 

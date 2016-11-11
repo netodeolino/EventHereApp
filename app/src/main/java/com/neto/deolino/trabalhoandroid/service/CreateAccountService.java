@@ -31,6 +31,7 @@ public class CreateAccountService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "Serviço Parado!");
         super.onDestroy();
     }
 

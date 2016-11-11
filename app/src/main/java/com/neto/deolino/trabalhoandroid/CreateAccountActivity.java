@@ -49,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             UserDAO userDAO = new UserDAO(this);
             userDAO.insert(user);
             startService(new Intent(this, CreateAccountService.class));
+            stopService(new Intent(this, CreateAccountService.class));
 
             Toast.makeText(CreateAccountActivity.this, getString(R.string.registration_completed), Toast.LENGTH_LONG).show();
             finish();

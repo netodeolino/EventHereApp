@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid.service;
+package com.neto.deolino.trabalhoandroid.service.web;
 
 import com.neto.deolino.trabalhoandroid.interfaces.AsyncExecutable;
 import com.neto.deolino.trabalhoandroid.model.User;

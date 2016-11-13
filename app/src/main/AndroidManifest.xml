@@ -167,5 +167,8 @@
         <service android:name=".service.local.Services"
             android:exported="false"/>
 
+        <service android:name=".service.local.FriendsRequestServices"
+            android:exported="false"/>
+
     </application>
 </manifest>

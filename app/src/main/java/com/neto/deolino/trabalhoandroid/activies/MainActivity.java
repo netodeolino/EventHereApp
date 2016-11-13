@@ -14,6 +14,7 @@ import com.facebook.CallbackManager;
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
 import com.neto.deolino.trabalhoandroid.service.local.Services;
 import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
 
@@ -48,11 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void loginButtonClicked(View view){
 
+        /* start Service new event */
         Intent start = new Intent(this, Services.class);
         startService(start);
 
+        /* start Service new friends requests */
+        Intent startFriend = new Intent(this, FriendsRequestServices.class);
+        startService(startFriend);
+
         String mail = etMail.getText().toString();
         String password = etPassword.getText().toString();
+
         /*
         if(mail.isEmpty() || password.isEmpty()){
             Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
@@ -118,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void broadcastCustomIntent(View view) {
         Intent intent = new Intent("MyCustomIntent");
-//        EditText et = (EditText)findViewById(R.id.extraIntent);
 
         intent.putExtra("message", (CharSequence)"Null");
         intent.setAction("com.deolino.android.A_CUSTOM_INTENT");

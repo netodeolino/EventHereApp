@@ -11,15 +11,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.neto.deolino.trabalhoandroid.activies.MainActivity;
 import com.neto.deolino.trabalhoandroid.R;
+import com.neto.deolino.trabalhoandroid.activies.MainActivity;
 
 import java.util.Random;
 
 /**
- * Created by deolino on 12/11/16.
+ * Created by deolino on 13/11/16.
  */
-public class Services extends Service {
+public class FriendsRequestServices extends Service {
 
     private static final String TAG = "Services";
     private boolean running;
@@ -42,21 +42,21 @@ public class Services extends Service {
 
         running = true;
 
-        new ClassThread().start();
+        new ClassFriendsThread().start();
         return super.onStartCommand(intent, flags, startId);
     }
 
-    class ClassThread extends Thread {
+    class ClassFriendsThread extends Thread {
         @Override
         public void run() {
             try {
-                while (running && count < 15){
+                while (running && count < 10){
                     Thread.sleep( 500 + new Random( System.currentTimeMillis() ).nextInt( 500 )  );
-                    Log.d(TAG, "Loading events");
+                    Log.d(TAG, "Loading friend requests");
                     count++;
                 }
-                if (count == 15){
-                    showNotification("Event Here", "Hi, you have a event!", 0, 1);
+                if (count == 10){
+                    showNotification("Event Here", "Hi, you have friends requests!", 0, 1);
                 }
             }catch (InterruptedException e){
                 Log.d(TAG, "Interrupted: " + e.toString());
@@ -82,7 +82,7 @@ public class Services extends Service {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 
         if (tipoNotificacao == 1) {
-            mBuilder.setSmallIcon(R.drawable.map_marker);
+            mBuilder.setSmallIcon(R.drawable.ic_action_add_friends);
 
             Intent resultIntent = new Intent(this, MainActivity.class);
 

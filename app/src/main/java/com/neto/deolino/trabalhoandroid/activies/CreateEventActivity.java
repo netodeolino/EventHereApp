@@ -25,6 +25,7 @@ import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
+import com.neto.deolino.trabalhoandroid.service.local.Services;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;
@@ -83,6 +84,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         context = this;
 
         mType = new EventType();
+        Intent stop = new Intent(this, Services.class);
+        stopService(stop);
     }
 
     @Override
@@ -177,8 +180,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         event = new Event();
 
         event.setType(mType);
-//        event.setDeparture(new Location(startLocationStr,this));
-//        event.setArrival(new Location(endLocationStr,this));
+        event.setDeparture(new Location(startLocationStr,this));
+        event.setArrival(new Location(endLocationStr,this));
         Log.d("CreateEventActivity", "StartLL: " + startLat + "," + startLong);
         Log.d("CreateEventActivity", "EndLL: " + endLat + ":" + endLong);
         event.setDeparture(Location.getLocationFromCoordinates(startLat, startLong, context));
@@ -203,6 +206,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         intent.putExtra("eventID", eventID);
         startActivity(intent);
 
-        //startActivity(new Intent(this, EventDescriptionActivity.class));
+        startActivity(new Intent(this, EventDescriptionActivity.class));
     }
 }

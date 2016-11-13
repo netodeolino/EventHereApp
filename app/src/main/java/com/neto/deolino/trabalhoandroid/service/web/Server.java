@@ -7,7 +7,7 @@ package com.neto.deolino.trabalhoandroid.service.web;
 public class Server {
 
     public static final String SERVER = "localhost";
-    public static final String PATHS[] = {"projetos","byke_routes","index.php"};
+    public static final String PATHS[] = {"projetos","evet_here","index.php"};
 
     public static int RESPONSE_CODE         = 0;
     public static final int RESPONSE_OK     = 200;

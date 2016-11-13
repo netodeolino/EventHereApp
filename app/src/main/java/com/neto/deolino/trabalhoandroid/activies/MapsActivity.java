@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.model.Event;
 
 /**

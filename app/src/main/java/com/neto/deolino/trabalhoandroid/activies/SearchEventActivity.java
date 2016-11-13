@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,12 +19,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
+import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.adapters.EventAdapter2;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
-import com.neto.deolino.trabalhoandroid.util.Constants;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
+import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.service.local.Services;

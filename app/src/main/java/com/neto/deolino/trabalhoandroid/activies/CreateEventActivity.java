@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -19,19 +19,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.EventDAO;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
-import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by deolino on 27/10/16.

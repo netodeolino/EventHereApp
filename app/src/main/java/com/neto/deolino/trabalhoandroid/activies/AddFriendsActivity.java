@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+
+import com.neto.deolino.trabalhoandroid.R;
 
 import java.util.ArrayList;
 

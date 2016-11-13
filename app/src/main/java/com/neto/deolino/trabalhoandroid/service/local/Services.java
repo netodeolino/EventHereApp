@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.neto.deolino.trabalhoandroid.MainActivity;
+import com.neto.deolino.trabalhoandroid.activies.MainActivity;
 import com.neto.deolino.trabalhoandroid.R;
 
 import java.util.Random;

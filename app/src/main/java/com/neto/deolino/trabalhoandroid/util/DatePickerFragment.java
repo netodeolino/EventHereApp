@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
-import com.neto.deolino.trabalhoandroid.CreateEventActivity;
+import com.neto.deolino.trabalhoandroid.activies.CreateEventActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

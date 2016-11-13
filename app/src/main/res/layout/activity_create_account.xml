@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:context=".CreateAccountActivity">
+    tools:context=".activies.CreateAccountActivity">
 
     <LinearLayout
         android:orientation="vertical"

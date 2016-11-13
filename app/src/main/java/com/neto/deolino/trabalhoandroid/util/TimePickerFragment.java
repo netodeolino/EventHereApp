@@ -8,7 +8,7 @@ import android.text.format.DateFormat;
 import android.widget.Button;
 import android.widget.TimePicker;
 
-import com.neto.deolino.trabalhoandroid.CreateEventActivity;
+import com.neto.deolino.trabalhoandroid.activies.CreateEventActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

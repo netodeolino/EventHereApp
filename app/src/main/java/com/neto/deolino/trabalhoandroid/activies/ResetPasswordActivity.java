@@ -1,10 +1,12 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.neto.deolino.trabalhoandroid.R;
 
 /**
  * Created by deolino on 02/11/16.

@@ -38,7 +38,7 @@ public class EventDAO extends AbstractDAO<Event> {
         etDao.insert(event.getType());
         SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("id", event.getId());
+        //values.put("id", event.getId());
         values.put("type_id", event.getType().getId());
         values.put("date", DateHelper.toFormatString(event.getDate()));
         values.put("departure_id", event.getDeparture().getId());

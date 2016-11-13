@@ -10,7 +10,11 @@ import com.neto.deolino.trabalhoandroid.model.EventType;
 import java.util.ArrayList;
 
 /**
- * Created by deolino on 06/11/16.
+ * Created by matheus on 07/11/16.
+ */
+
+/**
+ *  Created by deolino on 06/11/16.
  */
 class EventTypeDAO extends AbstractDAO<EventType> {
 

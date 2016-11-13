@@ -1,7 +1,9 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.neto.deolino.trabalhoandroid.R;
 
 /**
  * Created by deolino on 30/10/16.

@@ -1,4 +1,4 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,9 +20,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.neto.deolino.trabalhoandroid.R;
+import com.neto.deolino.trabalhoandroid.adapters.EventAdapter2;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
-import com.neto.deolino.trabalhoandroid.util.Constants;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 
 import java.util.ArrayList;
@@ -124,7 +124,8 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     private void populateEventsList() {
-
+        EventAdapter2 adapter = new EventAdapter2(this, arrayOfEvents);
+        searchResultListView.setAdapter(adapter);
     }
 
     public void showTimePickerDialog(View v) {
@@ -170,6 +171,19 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     public void searchButtonClicked(View view) {
+        Log.d("SearchEventActivity", "Search Button pressed");
 
+        int distance = Integer.parseInt(etKm.getText().toString());
+        if (distance > 2147483647) {
+            distance = 2147483647;
+        }
+        if (distance < 0) {
+            distance = 0;
+        }
+
+        arrayOfEvents = new ArrayList<>();
+        //ok
+        populateEventsList();
+        Log.d("SearchEventActivity", "Event searched!");
     }
 }

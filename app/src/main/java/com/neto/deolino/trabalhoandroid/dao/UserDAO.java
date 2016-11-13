@@ -12,7 +12,11 @@ import com.neto.deolino.trabalhoandroid.util.ImgSerializer;
 import java.util.ArrayList;
 
 /**
- * Created by deolino on 05/11/16.
+ * Created by matheus on 07/11/16.
+ */
+
+/**
+ *  Created by deolino on 05/11/16.
  */
 public class UserDAO extends AbstractDAO<User> {
 

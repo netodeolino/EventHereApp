@@ -1,19 +1,21 @@
-package com.neto.deolino.trabalhoandroid;
+package com.neto.deolino.trabalhoandroid.activies;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
+import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
+import com.neto.deolino.trabalhoandroid.service.local.Services;
 import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,27 +48,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginButtonClicked(View view){
+
+        /* start Service new event */
+        Intent start = new Intent(this, Services.class);
+        startService(start);
+
+        /* start Service new friends requests */
+        Intent startFriend = new Intent(this, FriendsRequestServices.class);
+        startService(startFriend);
+
         String mail = etMail.getText().toString();
         String password = etPassword.getText().toString();
 
-        /*List<User> users = new UserDAO(this).findAll();
-        boolean err = false;
-
+        /*
         if(mail.isEmpty() || password.isEmpty()){
-                Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
         } else {
-            for (User a : users) {
-                System.out.println(a.getName());
-                System.out.println(a.getPassword());
-                if ((a.getMail().equals(mail)) && (a.getPassword().equals(PasswordHelper.md5(password)))) {
-                    login();
-                    err = true;
+            final User user = new User();
+            new UserService().findByLogin(mail, PasswordHelper.md5(password), user, new AsyncExecutable() {
+                @Override
+                public void postExecute(int option) {
+                    if(Server.RESPONSE_CODE==UserService.ERROR_INCORRECT_DATA){
+                        pbLogin.setVisibility(View.GONE);
+                        Toast.makeText(MainActivity.this, getString(R.string.error_incorrect_data_login), Toast.LENGTH_LONG).show();
+                    } else {
+                        MainActivity.user.copy(user);
+                        login();
+                    }
                 }
-            }
+
+                @Override
+                public void preExecute(int option) {
+                    pbLogin.setVisibility(View.VISIBLE);
+                }
+            });
         }
-        if(err == false){
-            Toast.makeText(MainActivity.this, "ERRO NO LOGIN", Toast.LENGTH_LONG).show();
-        }*/
+        */
+
         UserDAO uDao = new UserDAO(this);
         User teste = uDao.findByLogin(PasswordHelper.md5(password));
         boolean err = false;
@@ -88,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
         if(err == false){
             Toast.makeText(MainActivity.this,getString(R.string.error_incorrect_data_login), Toast.LENGTH_LONG).show();
         }
-        //login();
     }
 
     public void login() {
+        if(user.getMail()==null || user.getMail().isEmpty()) return;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("user_id", user.getId());
@@ -103,5 +121,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetPassword(View view) {
         startActivity(new Intent(this, ResetPasswordActivity.class));
+    }
+
+    public void broadcastCustomIntent(View view) {
+        Intent intent = new Intent("MyCustomIntent");
+
+        intent.putExtra("message", (CharSequence)"Null");
+        intent.setAction("com.deolino.android.A_CUSTOM_INTENT");
+        sendBroadcast(intent);
     }
 }

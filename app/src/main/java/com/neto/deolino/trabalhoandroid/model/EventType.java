@@ -55,7 +55,7 @@ public class EventType {
 
     @Override
     public String toString() {
-        return "EventType{" +
+        return "EventTypeDAO{" +
                 "id=" + id +
                 ", specification='" + specification + '\'' +
                 ", type=" + type +

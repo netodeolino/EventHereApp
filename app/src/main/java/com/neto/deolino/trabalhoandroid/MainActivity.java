@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if(err == false){
             Toast.makeText(MainActivity.this, "ERRO NO LOGIN", Toast.LENGTH_LONG).show();
         }*/
+
         UserDAO uDao = new UserDAO(this);
         User teste = uDao.findByLogin(PasswordHelper.md5(password));
         boolean err = false;
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         if(err == false){
             Toast.makeText(MainActivity.this,getString(R.string.error_incorrect_data_login), Toast.LENGTH_LONG).show();
         }
-        //login();
     }
 
     public void login() {

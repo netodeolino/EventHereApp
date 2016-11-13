@@ -25,6 +25,7 @@ import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
+import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
 import com.neto.deolino.trabalhoandroid.service.local.Services;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
@@ -84,8 +85,14 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         context = this;
 
         mType = new EventType();
+
+        /* stop Service events */
         Intent stop = new Intent(this, Services.class);
         stopService(stop);
+
+        /* stop Service friends request */
+        Intent stopFriend = new Intent(this, FriendsRequestServices.class);
+        stopService(stopFriend);
     }
 
     @Override

@@ -86,4 +86,13 @@
         android:onClick="resetPassword"
         style="@style/noBorderButton"/>
 
+        <Button android:id="@+id/btnStartBroadcast"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="broadcastCustomIntent"
+        android:text="Test Connection..."
+        android:layout_above="@+id/btnCreateAccount"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="49dp" />
+
 </RelativeLayout>

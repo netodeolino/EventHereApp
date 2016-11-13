@@ -3,6 +3,7 @@
     package="com.neto.deolino.trabalhoandroid">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -155,6 +156,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.neto.deolino.trabalhoandroid.EventDescriptionActivity" />
         </activity>
+
+        <receiver android:name=".service.local.MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.deolino.android.A_CUSTOM_INTENT">
+                </action>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.local.Services"
+            android:exported="false"/>
 
     </application>
 </manifest>

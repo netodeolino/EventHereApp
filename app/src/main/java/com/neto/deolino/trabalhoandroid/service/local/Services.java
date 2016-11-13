@@ -50,12 +50,12 @@ public class Services extends Service {
         @Override
         public void run() {
             try {
-                while (running && count < 10){
+                while (running && count < 15){
                     Thread.sleep( 500 + new Random( System.currentTimeMillis() ).nextInt( 500 )  );
                     Log.d(TAG, "Loading");
                     count++;
                 }
-                if (count == 10){
+                if (count == 15){
                     showNotification("Event Here", "Hi, you have a event!", 0, 1);
                 }
             }catch (InterruptedException e){

@@ -1,5 +1,7 @@
 package com.neto.deolino.trabalhoandroid.service.web;
 
+import android.util.Log;
+
 import com.neto.deolino.trabalhoandroid.interfaces.AsyncExecutable;
 import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.util.ImgSerializer;

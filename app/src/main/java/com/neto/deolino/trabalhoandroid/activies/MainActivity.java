@@ -13,9 +13,12 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
+import com.neto.deolino.trabalhoandroid.interfaces.AsyncExecutable;
 import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
 import com.neto.deolino.trabalhoandroid.service.local.Services;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.service.web.UserService;
 import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         String mail = etMail.getText().toString();
         String password = etPassword.getText().toString();
 
-        /*
+
         if(mail.isEmpty() || password.isEmpty()){
             Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
         } else {
@@ -83,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        */
 
+        /*
         UserDAO uDao = new UserDAO(this);
         User teste = uDao.findByLogin(PasswordHelper.md5(password));
         boolean err = false;
@@ -106,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         if(err == false){
             Toast.makeText(MainActivity.this,getString(R.string.error_incorrect_data_login), Toast.LENGTH_LONG).show();
         }
+        */
     }
 
     public void login() {

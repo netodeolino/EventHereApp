@@ -77,7 +77,7 @@ public abstract class Abstract<T> {
 
     private void request(String action, String[] params, String[] values, int option){
         Uri.Builder builder = new Uri.Builder();
-        //builder.scheme(Server.SERVER_SCHEME);
+        builder.scheme(Server.SERVER_SCHEME);
         builder.authority(Server.SERVER);
         for(String path : Server.PATHS) builder.appendPath(path);
         builder.appendQueryParameter("action", action);
@@ -106,7 +106,7 @@ public abstract class Abstract<T> {
 
     private void send(String action, String [] params, String[] values, int option){
         Uri.Builder builder = new Uri.Builder();
-        //builder.scheme(Server.SERVER_SCHEME);
+        builder.scheme(Server.SERVER_SCHEME);
         builder.authority(Server.SERVER);
         for(String path : Server.PATHS) builder.appendPath(path);
         String body = "action="+action;

@@ -27,9 +27,13 @@ import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
 import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
 import com.neto.deolino.trabalhoandroid.service.local.Services;
+import com.neto.deolino.trabalhoandroid.service.web.EventService;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.util.Constants;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
 import com.neto.deolino.trabalhoandroid.util.DatePickerFragment;
 import com.neto.deolino.trabalhoandroid.util.TimePickerFragment;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -155,9 +159,18 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    public void selectLocationButtonPressed(View view){
+        Log.d("CreateEventActivity", "Location Button pressed");
+
+        Toast.makeText(this, "Google Play Services is not available.", Toast.LENGTH_LONG).show();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
         date.setDate(dayOfMonth);
         date.setMonth(monthOfYear);
         date.setYear(year);
@@ -187,8 +200,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         event = new Event();
 
         event.setType(mType);
-        event.setDeparture(new Location(startLocationStr,this));
-        event.setArrival(new Location(endLocationStr,this));
+        //event.setDeparture(new Location(startLocationStr,this));
+        //event.setArrival(new Location(endLocationStr,this));
         Log.d("CreateEventActivity", "StartLL: " + startLat + "," + startLong);
         Log.d("CreateEventActivity", "EndLL: " + endLat + ":" + endLong);
         event.setDeparture(Location.getLocationFromCoordinates(startLat, startLong, context));
@@ -203,16 +216,23 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         event.setOrganizer(dao.findById(prefs.getInt("user_id", 0)));
         dao.close();
 
-        EventDAO eventDAO = new EventDAO(this);
-        eventDAO.insert(event);
-
-        Log.d("CreateEventActivity", "Event created!");
-        Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();
-        int eventID = event.getId();
-        Intent intent = new Intent(context, EventDescriptionActivity.class);
-        intent.putExtra("eventID", eventID);
-        startActivity(intent);
-
-        startActivity(new Intent(this, EventDescriptionActivity.class));
+        new EventService().insert(event, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(Server.RESPONSE_CODE == Server.RESPONSE_OK){
+                    //ok
+                    Log.d("CreateEventActivity", "Event created!");
+                    Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();
+                    int eventID = event.getId();
+                    Intent intent = new Intent(context, EventDescriptionActivity.class);
+                    intent.putExtra("eventID", eventID );
+                    startActivity(intent);
+                } else{
+                    //not ok
+                    Log.d("CreateEventActivity", "Error creating event!");
+                    Toast.makeText(context, R.string.error_creating_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }

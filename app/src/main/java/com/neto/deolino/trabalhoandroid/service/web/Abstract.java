@@ -114,6 +114,7 @@ public abstract class Abstract<T> {
             for(int k=0;k<params.length && k<values.length;k++) body += "&"+params[k]+"="+values[k];
         try {
             URL url = new URL(builder.build().toString());
+            Log.i("URLLLL", url.toString());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoInput(true);

@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         String mail = etMail.getText().toString();
         String password = etPassword.getText().toString();
 
-
         if(mail.isEmpty() || password.isEmpty()){
             Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
         } else {
@@ -86,30 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
-        /*
-        UserDAO uDao = new UserDAO(this);
-        User teste = uDao.findByLogin(PasswordHelper.md5(password));
-        boolean err = false;
-
-        //debug
-        System.out.println(teste.getMail());
-        System.out.println(teste.getPassword());
-        System.out.println(mail);
-        System.out.println(PasswordHelper.md5(password));
-
-        if (mail.isEmpty() || password.isEmpty()) {
-            Toast.makeText(MainActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
-        }
-        if ((teste.getMail().equals(mail)) && (teste.getPassword().equals(PasswordHelper.md5(password)))) {
-            err = true;
-            MainActivity.user.copy(teste);
-            login();
-        }
-        if(err == false){
-            Toast.makeText(MainActivity.this,getString(R.string.error_incorrect_data_login), Toast.LENGTH_LONG).show();
-        }
-        */
     }
 
     public void login() {
@@ -118,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("user_id", user.getId());
         editor.apply();
+
+        /* User DAO SQLite for use/find user in SharedPreferences */
+        UserDAO dao = new UserDAO(this);
+        dao.insert(user);
+        dao.close();
 
         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
         finish();

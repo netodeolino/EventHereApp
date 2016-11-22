@@ -19,6 +19,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.EventDAO;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
@@ -162,11 +166,71 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     public void selectLocationButtonPressed(View view){
         Log.d("CreateEventActivity", "Location Button pressed");
 
-        Toast.makeText(this, "Google Play Services is not available.", Toast.LENGTH_LONG).show();
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            if(view.getId() == R.id.btnStartLocation || view.getId() == R.id.tvEventStart){
+                startActivityForResult(builder.build(this), Constants.PLACE_PICKER_START_REQUEST);
+            }
+            else if(view.getId() == R.id.btnEndLocation || view.getId() == R.id.tvEventEnd){
+                startActivityForResult(builder.build(this), Constants.PLACE_PICKER_END_REQUEST);
+            }
+
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            Toast.makeText(this, "Google Play Services is not available.", Toast.LENGTH_LONG).show();
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.PLACE_PICKER_START_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
 
+                startLat = place.getLatLng().latitude;
+                startLong = place.getLatLng().longitude;
+
+                editor.putString("startLatStr", String.valueOf(startLat));
+                editor.putString("startLongStr", String.valueOf(startLong));
+
+                Log.d("CreateEventActivity", "StartLL: " + startLat + ","  + startLong);
+//                startLocationStr = String.format("Place: %s", place.getName());
+                startLocationStr = place.getName().toString();
+
+//                toastMsg = String.format("LatLng: %s", place.getLatLng());
+
+//                toastMsg = String.format("Address: %s", place.getAddress());
+                Toast.makeText(this, startLocationStr, Toast.LENGTH_LONG).show();
+
+                tvStart.setText(startLocationStr);
+                editor.putString("start", startLocationStr);
+                editor.apply();
+            }
+        }
+
+        else if (requestCode == Constants.PLACE_PICKER_END_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+
+                endLat = place.getLatLng().latitude;
+                endLong = place.getLatLng().longitude;
+
+                editor.putString("endLatStr", String.valueOf(endLat));
+                editor.putString("endLongStr", String.valueOf(startLong));
+
+                endLocationStr = place.getName().toString();
+
+//                toastMsg = String.format("LatLng: %s", place.getLatLng());
+
+//                toastMsg = String.format("Address: %s", place.getAddress());
+                Toast.makeText(this, endLocationStr, Toast.LENGTH_LONG).show();
+
+                tvEnd.setText(endLocationStr);
+                editor.putString("end", endLocationStr);
+                editor.apply();
+            }
+        }
     }
 
     @Override

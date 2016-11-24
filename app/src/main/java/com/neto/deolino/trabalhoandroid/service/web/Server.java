@@ -7,7 +7,7 @@ package com.neto.deolino.trabalhoandroid.service.web;
 public class Server {
 
     public static final String SERVER_SCHEME = "http";
-    public static final String SERVER = "192.168.122.1";
+    public static final String SERVER = "192.168.1.7";
     public static final String PATHS[] = {"projetos","event_here","index.php"};
 
     public static int RESPONSE_CODE         = 0;

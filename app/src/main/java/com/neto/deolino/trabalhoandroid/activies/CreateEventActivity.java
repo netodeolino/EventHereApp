@@ -29,6 +29,7 @@ import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
+import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
 import com.neto.deolino.trabalhoandroid.service.local.Services;
 import com.neto.deolino.trabalhoandroid.service.web.EventService;
@@ -259,7 +260,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     }
 
     public void createEventButtonPressed(View view) {
-        Log.d("CreateEventActivity", "Create Button pressed");
+        Log.d("CreateEventActivity", "Create Event Button pressed");
         Toast.makeText(context, R.string.creating_event, Toast.LENGTH_LONG).show();
         event = new Event();
 
@@ -277,7 +278,11 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         event.setOver(false);
 
         UserDAO dao = new UserDAO(this);
+        //this.user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0));
+        //Log.i("Test Create Event", user.getName());
+
         event.setOrganizer(dao.findById(prefs.getInt("user_id", 0)));
+        //event.setOrganizer(dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0)));
         dao.close();
 
         new EventService().insert(event, new PostExecute() {

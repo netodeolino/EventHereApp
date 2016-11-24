@@ -25,6 +25,9 @@ import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.enumerations.Gender;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.service.web.UserService;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 /**
  * Created by deolino on 30/10/16.
@@ -147,14 +150,19 @@ public class EditAccountActivity extends AppCompatActivity {
         if(!description.isEmpty()) user.setDescription(description);
         if(image != null) user.setImage(image);
 
-        UserDAO dao = new UserDAO(getApplicationContext());
-        dao.update(user);
-        dao.close();
-
-        //intent = new Intent(this, UserDerscriptionActivity.class);
-        //startActivity(intent);
-
-        Toast.makeText(EditAccountActivity.this, R.string.update_account_confirmed, Toast.LENGTH_LONG).show();
-        finish();
+        new UserService().update(user, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
+                    UserDAO dao = new UserDAO(getApplicationContext());
+                    dao.update(user);
+                    dao.close();
+                    Toast.makeText(EditAccountActivity.this, R.string.update_account_confirmed, Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    Toast.makeText(EditAccountActivity.this, getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

@@ -108,6 +108,7 @@ public abstract class Abstract<T> {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(Server.SERVER_SCHEME);
         builder.authority(Server.SERVER);
+
         for(String path : Server.PATHS) builder.appendPath(path);
         String body = "action="+action;
         if(params!=null && params!=null)

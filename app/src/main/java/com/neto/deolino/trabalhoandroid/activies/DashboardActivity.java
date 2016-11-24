@@ -142,7 +142,7 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_menu, menu);
         menu.findItem(R.id.menuMyAccount).setVisible(true);
-        //if (user.getImage() != null) /* User getImage esta null */
+        //if (user.getImage() != null) /* User getImage está null */
         //    menu.findItem(R.id.menuMyAccount).setIcon(new BitmapDrawable(getResources(), user.getImage()));
         return super.onCreateOptionsMenu(menu);
     }

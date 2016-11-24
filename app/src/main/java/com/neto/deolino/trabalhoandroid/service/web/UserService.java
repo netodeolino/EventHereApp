@@ -7,6 +7,7 @@ import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.util.ImgSerializer;
 import com.neto.deolino.trabalhoandroid.util.JsonParser;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

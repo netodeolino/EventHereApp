@@ -28,7 +28,7 @@ public class UserDAO extends AbstractDAO<User> {
     public void insert(User user) {
         SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //values.put("id", user.getId());
+        values.put("id", user.getId());
         values.put("name", user.getName());
         values.put("mail", user.getMail());
         values.put("password", user.getPassword());

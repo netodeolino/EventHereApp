@@ -33,11 +33,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etMail = (EditText) findViewById(R.id.etMail);
-        etPassword = (EditText) findViewById(R.id.etPassword);
-        //btLogin = (LoginButton) findViewById(R.id.btnFb);
-        pbLogin = (ProgressBar) findViewById(R.id.pbLogin);
-        pbLogin.setVisibility(View.GONE);
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //int id = prefs.getInt("user_id", 0);
+
+        //if (id==0) {
+            etMail = (EditText) findViewById(R.id.etMail);
+            etPassword = (EditText) findViewById(R.id.etPassword);
+            //btLogin = (LoginButton) findViewById(R.id.btnFb);
+            pbLogin = (ProgressBar) findViewById(R.id.pbLogin);
+            pbLogin.setVisibility(View.GONE);
+        //} else {
+        //    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+        //    finish();
+        //}
     }
 
     @Override

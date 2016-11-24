@@ -19,6 +19,8 @@ import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.enumerations.Gender;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.web.UserService;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 
 /**
@@ -54,13 +56,13 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             dao.close();
             updateComponents();
         } else {
-            /*user = new User();
+            user = new User();
             new UserService().findById(id, user, new PostExecute() {
                 @Override
                 public void postExecute(int option) {
                     updateComponents();
                 }
-            });*/
+            });
             Toast.makeText(UserDerscriptionActivity.this, "NÃO POSSUI ESSE CARA", Toast.LENGTH_LONG).show();
         }
     }

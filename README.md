@@ -1,6 +1,6 @@
 # Event Here
-  App para marcar corrida, pedalada ou caminhada.
+    App para marcar corrida, pedalada ou caminhada.
 
 ## Tecnologias
-  App - Java, Android
-  WebServer - PHP, MySQL
+    App - Java, Android, SQLite
+    WebServer - PHP, MySQL

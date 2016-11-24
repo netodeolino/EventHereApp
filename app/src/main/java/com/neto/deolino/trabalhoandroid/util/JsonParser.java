@@ -28,6 +28,21 @@ public class JsonParser {
     public static Event toEvent(InputStream in){
         EventPOJO e =  new GsonBuilder().create().fromJson(new InputStreamReader(in), EventPOJO.class);
         return e.getEvent();
+
+        /*try {
+            InputStreamReader isr = new InputStreamReader(in);
+            BufferedReader br = new BufferedReader(isr);
+            String s = "";
+            while((s=br.readLine())!=null){
+                Log.i("", s);
+            }
+            br.close();
+            isr.close();
+        } catch (IOException p) {
+            p.printStackTrace();
+        }
+
+        return new Event();*/
     }
 
     public static int toInt(InputStream in){

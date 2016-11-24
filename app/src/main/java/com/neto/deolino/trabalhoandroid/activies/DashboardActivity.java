@@ -2,6 +2,8 @@ package com.neto.deolino.trabalhoandroid.activies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.neto.deolino.trabalhoandroid.R;
+import com.neto.deolino.trabalhoandroid.adapters.EventAdapter2;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.web.EventService;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 import java.util.ArrayList;
 
@@ -25,11 +32,13 @@ import java.util.ArrayList;
  */
 public class DashboardActivity extends AppCompatActivity {
 
+    protected static final String TAG = "DashboardActivity";
     User user;
     ListView recentEventsListView;
     Context context;
     int eventID;
     final ArrayList<Event> arrayOfEvents = new ArrayList<>();
+    protected Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +69,57 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void populateEventsList() {
         //Construct data source
-        //arrayOfEvents.clear();
+        arrayOfEvents.clear();
+        new EventService().findNearbyEvents(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0), com.neto.deolino.trabalhoandroid.model.Location.getLocationFromAndroidLocation(mLastLocation, context), arrayOfEvents, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
+
+                    Log.d("DashboardActivity", arrayOfEvents.size()+"");
+
+                    //Create the adapter to convert the array to views
+                    EventAdapter2 adapter = new EventAdapter2(getApplicationContext(), arrayOfEvents);
+                    //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+                    //attach the adapter to the listview
+                    recentEventsListView.setAdapter(adapter);
+
+                    //ok
+                    Log.d("DashboardActivity", "Event searched location based!");
+
+
+                } else {
+                    //not ok
+                    Log.d("DashboardActivity", "Error searching event location based!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void populateAllEventsList() {
         //Construct data source
+        arrayOfEvents.clear();
+        new EventService().findAvailable(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0),arrayOfEvents, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
+                    //Create the adapter to convert the array to views
+                    EventAdapter2 adapter = new EventAdapter2(getApplicationContext(), arrayOfEvents);
+                    //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+                    //attach the adapter to the listview
+                    recentEventsListView.setAdapter(adapter);
+
+                    //ok
+                    Log.d("DashboardActivity", "All Events searched!");
+
+
+                } else {
+                    //not ok
+                    Log.d("DashboardActivity", "Error searching all events!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     public void dashboardButtonClicked(View view) {
@@ -87,7 +142,7 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_menu, menu);
         menu.findItem(R.id.menuMyAccount).setVisible(true);
-        //if (user.getImage() != null)
+        //if (user.getImage() != null) /* User getImage está null */
         //    menu.findItem(R.id.menuMyAccount).setIcon(new BitmapDrawable(getResources(), user.getImage()));
         return super.onCreateOptionsMenu(menu);
     }

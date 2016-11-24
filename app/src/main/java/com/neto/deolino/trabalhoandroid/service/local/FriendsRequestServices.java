@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.activies.MainActivity;
+import com.neto.deolino.trabalhoandroid.util.NotificationUtil;
 
 import java.util.Random;
 
@@ -56,13 +57,14 @@ public class FriendsRequestServices extends Service {
                     count++;
                 }
                 if (count == 10){
-                    showNotification("Event Here", "Hi, you have friends requests!", 0, 1);
+                    Context context = FriendsRequestServices.this;
+                    Intent intent = new Intent(context, MainActivity.class);
+                    NotificationUtil.create(context, intent, "Event Here", "Hi, you have friends requests!", 1);
                 }
             }catch (InterruptedException e){
                 Log.d(TAG, "Interrupted: " + e.toString());
             }finally {
                 stopSelf();
-
             }
             super.run();
         }
@@ -72,32 +74,5 @@ public class FriendsRequestServices extends Service {
     public void onDestroy() {
         running = false;
         Log.d(TAG, "Service destroyed");
-    }
-
-    public void showNotification(String title, String content, int id, int tipoNotificacao) {
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setContentTitle(title).setContentText(content).setAutoCancel(true);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-
-        if (tipoNotificacao == 1) {
-            mBuilder.setSmallIcon(R.drawable.ic_action_add_friends);
-
-            Intent resultIntent = new Intent(this, MainActivity.class);
-
-            stackBuilder.addParentStack(MainActivity.class);
-            stackBuilder.addNextIntent(resultIntent);
-        }
-
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        long[] vibrate = {0,100,200,300};
-
-        mBuilder.setContentIntent(resultPendingIntent);
-        mBuilder.setVibrate(vibrate);
-
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(id, mBuilder.build());
     }
 }

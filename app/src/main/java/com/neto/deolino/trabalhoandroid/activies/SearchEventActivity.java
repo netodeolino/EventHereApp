@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +20,25 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.adapters.EventAdapter2;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
+import com.neto.deolino.trabalhoandroid.model.Location;
+import com.neto.deolino.trabalhoandroid.service.web.EventService;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.util.Constants;
 import com.neto.deolino.trabalhoandroid.util.DateHelper;
+import com.neto.deolino.trabalhoandroid.util.SearchDatePickerFragment;
+import com.neto.deolino.trabalhoandroid.util.SearchTimePickerFragment;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -129,19 +143,48 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     public void showTimePickerDialog(View v) {
-
+        DialogFragment newFragment = new SearchTimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
     public void showDatePickerDialog(View v) {
-
+        DialogFragment newFragment = new SearchDatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
     public void selectLocationButtonPressed(View view){
+        Log.d("CreateEventActivity", "Location Button pressed");
+
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            if(view.getId() == R.id.tvEventAddress || view.getId() == R.id.btnAddressLocation){
+                startActivityForResult(builder.build(this), Constants.PLACE_PICKER_SEARCH_REQUEST);
+            }
+
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            Toast.makeText(this, R.string.google_play_not_available, Toast.LENGTH_LONG).show();
+        }
 
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.PLACE_PICKER_SEARCH_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                searchLocationStr = place.getName().toString();
 
+                Toast.makeText(this, searchLocationStr, Toast.LENGTH_LONG).show();
+
+                tvAddress.setText(searchLocationStr);
+                editor.putString("location", searchLocationStr);
+                editor.apply();
+//                toastMsg = String.format("LatLng: %s", place.getLatLng());
+//                toastMsg = String.format("Address: %s", place.getAddress());
+            }
+        }
     }
 
 
@@ -182,8 +225,23 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         }
 
         arrayOfEvents = new ArrayList<>();
-        //ok
-        populateEventsList();
-        Log.d("SearchEventActivity", "Event searched!");
+
+        new EventService().searchAvailableEventsToUser(arrayOfEvents, prefs.getInt("user_id", 0), mType, dateString, timeString, distance, new Location(searchLocationStr, this), new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(Server.RESPONSE_CODE == Server.RESPONSE_OK){
+                    //ok
+                    populateEventsList();
+
+                    Log.d("SearchEventActivity", "Event searched!");
+                } else{
+                    //not ok
+                    Log.d("SearchEventActivity", "Error searching event!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+//        String dateString = DateHelper.toFormatString(searchDate);
+//        Log.w("SearchEventActivity","Date = " + dateString);
     }
 }

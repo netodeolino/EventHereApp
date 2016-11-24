@@ -7,6 +7,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.neto.deolino.trabalhoandroid.R;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.service.web.UserService;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 /**
  * Created by deolino on 02/11/16.
@@ -28,7 +31,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
         if(mail.isEmpty()){
             Toast.makeText(ResetPasswordActivity.this, getString(R.string.error_empty_fields), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(ResetPasswordActivity.this, getString(R.string.reset_password), Toast.LENGTH_LONG).show();
+            new UserService().retrievePassword(mail, new PostExecute() {
+                @Override
+                public void postExecute(int option) {
+                    if (Server.RESPONSE_CODE==Server.RESPONSE_OK) {
+                        Toast.makeText(ResetPasswordActivity.this, getString(R.string.reset_password), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(ResetPasswordActivity.this, getString(R.string.error_user_not_found), Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
     }
 }

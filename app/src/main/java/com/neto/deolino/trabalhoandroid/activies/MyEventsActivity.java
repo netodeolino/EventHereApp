@@ -17,6 +17,9 @@ import com.neto.deolino.trabalhoandroid.adapters.EventAdapter2;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.User;
+import com.neto.deolino.trabalhoandroid.service.web.Server;
+import com.neto.deolino.trabalhoandroid.service.web.UserService;
+import com.neto.deolino.trabalhoandroid.util.async.PostExecute;
 
 import java.util.ArrayList;
 
@@ -32,89 +35,8 @@ public class MyEventsActivity extends AppCompatActivity {
     Context context;
     int eventID;
 
-    String [] eventos1 = {"Evento 1", "Evento 2", "Evento 3"};
-    String [] eventos2 = {"Evento 4", "Evento 5", "Evento 6"};
-    String [] eventos3 = {"Evento 7", "Evento 8", "Evento 9"};
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_events);
-
-        context = this;
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = prefs.edit();
-
-        tabHost = (TabHost) findViewById(R.id.tabHost);
-        tabHost.setup();
-
-        TabHost.TabSpec spec = tabHost.newTabSpec(("TAB1"));
-        //Tab indicator specified as Label and Icon
-        spec.setIndicator(getString(R.string.tabUpcomingEvents), getResources().getDrawable(R.mipmap.ic_launcher));
-        spec.setContent(R.id.layoutUpcomingEvents);
-        tabHost.addTab(spec);
-
-        spec = tabHost.newTabSpec(("TAB2"));
-
-        //Tab indicator specified as Label and Icon
-        spec.setIndicator(getString(R.string.tabRecentEvents), getResources().getDrawable(R.mipmap.ic_launcher));
-        spec.setContent(R.id.layoutRecentEvents);
-        tabHost.addTab(spec);
-
-        spec = tabHost.newTabSpec(("TAB3"));
-
-        //Tab indicator specified as Label and Icon
-        spec.setIndicator(getString(R.string.tabEventInvitations), getResources().getDrawable(R.mipmap.ic_launcher));
-        spec.setContent(R.id.layoutInvitations);
-        tabHost.addTab(spec);
-
-        final ListView upcomingEventsListView = (ListView) findViewById(R.id.lvMyUpcomingEvents);
-        final ListView recentEventsListView = (ListView) findViewById(R.id.lvMyRecentEvents);
-        final ListView invitationsListView = (ListView) findViewById(R.id.lvMyInvitations);
-
-
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, eventos1);
-        upcomingEventsListView.setAdapter(adapter1);
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, eventos2);
-        recentEventsListView.setAdapter(adapter2);
-
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, eventos3);
-        invitationsListView.setAdapter(adapter3);
-
-        upcomingEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int itemP = position;
-                String itemV = (String) upcomingEventsListView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Position:" + itemP + "ListItem:" + itemV, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int itemP = position;
-                String itemV = (String) recentEventsListView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Position:" + itemP + "ListItem:" + itemV, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        invitationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int itemP = position;
-                String itemV = (String) invitationsListView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Position:" + itemP + "ListItem:" + itemV, Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,27 +113,10 @@ public class MyEventsActivity extends AppCompatActivity {
         final UserDAO dao = new UserDAO(context);
         final User user = dao.findById(prefs.getInt("user_id", 0));
 
-
-        arrayOfEvents = user.getConfirmedEvents();
-
-        Log.d("MyEventsActivity", arrayOfEvents.size()+"");
-        //Create the adapter to convert the array to views
-        EventAdapter2 adapter = new EventAdapter2(context, arrayOfEvents);
-        recentEventsListView = (ListView) findViewById(R.id.lvMyUpcomingEvents);
-        //attach the adapter to the listview
-        recentEventsListView.setAdapter(adapter);
-        //ok
-        Log.d("MyEventsActivity", "Confirmed Events Searched");
-
-
-
-        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+        new UserService().findEventsConfirmed(user, new PostExecute() {
             @Override
-            public void onTabChanged(String tabId) {
-
-                //upcoming events
-                if (tabHost.getCurrentTab() == 0) {
-                    Log.d("MyEventsActivity", "Tab 0 selected");
+            public void postExecute(int option) {
+                if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
 
                     arrayOfEvents = user.getConfirmedEvents();
 
@@ -223,42 +128,95 @@ public class MyEventsActivity extends AppCompatActivity {
                     recentEventsListView.setAdapter(adapter);
                     //ok
                     Log.d("MyEventsActivity", "Confirmed Events Searched");
-
-                }
-                //recent events
-                if (tabHost.getCurrentTab() == 1) {
-                    Log.d("MyEventsActivity", "Tab 1 selected");
-
-                    arrayOfEvents = user.getHistoric();
-
-                    Log.d("MyEventsActivity", arrayOfEvents.size()+"");
-                    //Create the adapter to convert the array to views
-                    EventAdapter2 adapter = new EventAdapter2(context, arrayOfEvents);
-                    recentEventsListView = (ListView) findViewById(R.id.lvMyRecentEvents);
-                    //attach the adapter to the listview
-                    recentEventsListView.setAdapter(adapter);
-                    //ok
-                    Log.d("MyEventsActivity", "Recent Events Searched");
-
-                }
-                //invited events
-                if (tabHost.getCurrentTab() == 2) {
-                    Log.d("MyEventsActivity", "Tab 2 selected");
-
-                    arrayOfEvents = user.getInvited();
-
-                    Log.d("MyEventsActivity", arrayOfEvents.size()+"");
-                    //Create the adapter to convert the array to views
-                    EventAdapter2 adapter = new EventAdapter2(context, arrayOfEvents);
-                    recentEventsListView = (ListView) findViewById(R.id.lvMyInvitations);
-                    //attach the adapter to the listview
-                    recentEventsListView.setAdapter(adapter);
-                    //ok
-                    Log.d("MyEventsActivity", "Invited Events Searched");
+                } else {
+                    //not ok
+                    Log.d("MyEventsActivity", "Error searching confirmed events!");
                 }
             }
         });
 
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+
+                //upcoming events
+                if (tabHost.getCurrentTab() == 0) {
+                    Log.d("MyEventsActivity", "Tab 0 selected");
+                    new UserService().findEventsConfirmed(user, new PostExecute() {
+                        @Override
+                        public void postExecute(int option) {
+                            if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
+
+                                arrayOfEvents = user.getConfirmedEvents();
+
+                                Log.d("MyEventsActivity", arrayOfEvents.size()+"");
+                                //Create the adapter to convert the array to views
+                                EventAdapter2 adapter = new EventAdapter2(context, arrayOfEvents);
+                                recentEventsListView = (ListView) findViewById(R.id.lvMyUpcomingEvents);
+                                //attach the adapter to the listview
+                                recentEventsListView.setAdapter(adapter);
+                                //ok
+                                Log.d("MyEventsActivity", "Confirmed Events Searched");
+                            } else {
+                                //not ok
+                                Log.d("MyEventsActivity", "Error searching confirmed events!");
+                            }
+                        }
+                    });
+                }
+                //recent events
+                if (tabHost.getCurrentTab() == 1) {
+                    Log.d("MyEventsActivity", "Tab 1 selected");
+                    new UserService().findHistoric(user, new PostExecute() {
+                        @Override
+                        public void postExecute(int option) {
+                            if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
+
+                                arrayOfEvents = user.getHistoric();
+
+                                Log.d("MyEventsActivity", arrayOfEvents.size()+"");
+                                //Create the adapter to convert the array to views
+                                EventAdapter2 adapter = new EventAdapter2(context, arrayOfEvents);
+                                recentEventsListView = (ListView) findViewById(R.id.lvMyRecentEvents);
+                                //attach the adapter to the listview
+                                recentEventsListView.setAdapter(adapter);
+                                //ok
+                                Log.d("MyEventsActivity", "Recent Events Searched");
+                            } else {
+                                //not ok
+                                Log.d("MyEventsActivity", "Error searching recent events!");
+                            }
+                        }
+                    });
+                }
+                //invited events
+                if (tabHost.getCurrentTab() == 2) {
+                    Log.d("MyEventsActivity", "Tab 2 selected");
+                    new UserService().findEventsInvited(user, new PostExecute() {
+                        @Override
+                        public void postExecute(int option) {
+                            if (Server.RESPONSE_CODE == Server.RESPONSE_OK) {
+
+                                arrayOfEvents = user.getInvited();
+
+                                Log.d("MyEventsActivity", arrayOfEvents.size()+"");
+                                //Create the adapter to convert the array to views
+                                EventAdapter2 adapter = new EventAdapter2(context, arrayOfEvents);
+                                recentEventsListView = (ListView) findViewById(R.id.lvMyInvitations);
+                                //attach the adapter to the listview
+                                recentEventsListView.setAdapter(adapter);
+                                //ok
+                                Log.d("MyEventsActivity", "Invited Events Searched");
+                            } else {
+                                //not ok
+                                Log.d("MyEventsActivity", "Error searching invited events!");
+                            }
+                        }
+                    });
+                }
+            }
+        });
         dao.close();
     }
 }

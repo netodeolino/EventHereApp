@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.neto.deolino.trabalhoandroid.activies.MainActivity;
 import com.neto.deolino.trabalhoandroid.R;
+import com.neto.deolino.trabalhoandroid.util.NotificationUtil;
 
 import java.util.Random;
 
@@ -50,19 +51,20 @@ public class Services extends Service {
         @Override
         public void run() {
             try {
-                while (running && count < 15){
+                while (running && count < 25){
                     Thread.sleep( 500 + new Random( System.currentTimeMillis() ).nextInt( 500 )  );
                     Log.d(TAG, "Loading events");
                     count++;
                 }
-                if (count == 15){
-                    showNotification("Event Here", "Hi, you have a event!", 0, 1);
+                if (count == 25){
+                    Context context = Services.this;
+                    Intent intent = new Intent(context, MainActivity.class);
+                    NotificationUtil.create(context, intent, "Event Here", "Hi, you have a event!", 1);
                 }
             }catch (InterruptedException e){
                 Log.d(TAG, "Interrupted: " + e.toString());
             }finally {
                 stopSelf();
-
             }
             super.run();
         }
@@ -72,32 +74,5 @@ public class Services extends Service {
     public void onDestroy() {
         running = false;
         Log.d(TAG, "Service destroyed");
-    }
-
-    public void showNotification(String title, String content, int id, int tipoNotificacao) {
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
-                .setContentTitle(title).setContentText(content).setAutoCancel(true);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-
-        if (tipoNotificacao == 1) {
-            mBuilder.setSmallIcon(R.drawable.map_marker);
-
-            Intent resultIntent = new Intent(this, MainActivity.class);
-
-            stackBuilder.addParentStack(MainActivity.class);
-            stackBuilder.addNextIntent(resultIntent);
-        }
-
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        long[] vibrate = {0,100,200,300};
-
-        mBuilder.setContentIntent(resultPendingIntent);
-        mBuilder.setVibrate(vibrate);
-
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(id, mBuilder.build());
     }
 }

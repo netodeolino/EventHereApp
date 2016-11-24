@@ -29,7 +29,7 @@ class EventTypeDAO extends AbstractDAO<EventType> {
         } else {
             SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("id", eventType.getId());
+            //values.put("id", eventType.getId());
             values.put("type", eventType.getType().ordinal());
             values.put("specification", eventType.getSpecification());
             database.insert("event_type", null, values);

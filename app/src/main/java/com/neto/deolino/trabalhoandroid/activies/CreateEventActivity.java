@@ -171,6 +171,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         try {
             if(view.getId() == R.id.btnStartLocation || view.getId() == R.id.tvEventStart){
                 startActivityForResult(builder.build(this), Constants.PLACE_PICKER_START_REQUEST);
+                //startActivity(new Intent(this, MapaTest.class));
             }
             else if(view.getId() == R.id.btnEndLocation || view.getId() == R.id.tvEventEnd){
                 startActivityForResult(builder.build(this), Constants.PLACE_PICKER_END_REQUEST);

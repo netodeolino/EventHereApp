@@ -16,4 +16,10 @@
         android:title="@string/satellite_map"
         android:icon="@android:drawable/ic_menu_myplaces"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_my_location"
+        android:title="Minha localização"
+        android:icon="@android:drawable/ic_menu_mylocation"
+        app:showAsAction="always" />
 </menu>

@@ -23,13 +23,12 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+
 import com.neto.deolino.trabalhoandroid.R;
-import com.neto.deolino.trabalhoandroid.dao.EventDAO;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.model.Event;
 import com.neto.deolino.trabalhoandroid.model.EventType;
 import com.neto.deolino.trabalhoandroid.model.Location;
-import com.neto.deolino.trabalhoandroid.model.User;
 import com.neto.deolino.trabalhoandroid.service.local.FriendsRequestServices;
 import com.neto.deolino.trabalhoandroid.service.local.Services;
 import com.neto.deolino.trabalhoandroid.service.web.EventService;
@@ -172,6 +171,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         try {
             if(view.getId() == R.id.btnStartLocation || view.getId() == R.id.tvEventStart){
                 startActivityForResult(builder.build(this), Constants.PLACE_PICKER_START_REQUEST);
+                //startActivity(new Intent(this, MapaTest.class));
             }
             else if(view.getId() == R.id.btnEndLocation || view.getId() == R.id.tvEventEnd){
                 startActivityForResult(builder.build(this), Constants.PLACE_PICKER_END_REQUEST);

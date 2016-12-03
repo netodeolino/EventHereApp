@@ -61,7 +61,7 @@ public class NotificationUtil {
         // Cria a notificação
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
         b.setDefaults(Notification.DEFAULT_ALL); // Ativa configurações padrão
-        b.setSmallIcon(R.drawable.ic_notification_icon); // Ícone
+        b.setSmallIcon(R.drawable.map_marker); // Ícone
         b.setContentTitle(contentTitle); // Título
         b.setContentText(contentText); // Mensagem
         b.setContentIntent(p); // Intent que será chamada ao clicar na notificação.
@@ -79,7 +79,7 @@ public class NotificationUtil {
         // Cria a notificação
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
         b.setDefaults(Notification.DEFAULT_ALL); // Ativa configurações padrão
-        b.setSmallIcon(R.drawable.ic_notification_icon); // Ícone
+        b.setSmallIcon(R.drawable.map_marker); // Ícone
         b.setContentTitle(contentTitle); // Título
         b.setContentText(contentText); // Mensagem
         b.setContentIntent(p); // Intent que será chamada ao clicar na notificação.
@@ -88,8 +88,8 @@ public class NotificationUtil {
         // Ação customizada (deixei a mesma intent para os dois)
         PendingIntent actionIntent = PendingIntent.getBroadcast(
                 context, 0, new Intent(ACTION_VISUALIZAR), 0);
-        b.addAction(R.drawable.ic_acao_pause, "Pause", actionIntent);
-        b.addAction(R.drawable.ic_acao_play, "Play", actionIntent);
+        b.addAction(R.drawable.map_marker, "Pause", actionIntent);
+        b.addAction(R.drawable.map_marker, "Play", actionIntent);
 
         NotificationManagerCompat nm = NotificationManagerCompat.from(context);
         nm.notify(id, b.build());
@@ -102,7 +102,7 @@ public class NotificationUtil {
         // Cria a notificação
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
         b.setDefaults(Notification.DEFAULT_ALL); // Ativa configurações padrão
-        b.setSmallIcon(R.drawable.ic_notification_icon); // Ícone
+        b.setSmallIcon(R.drawable.map_marker); // Ícone
         b.setContentTitle(contentTitle); // Título
         b.setContentText(contentText); // Mensagem
         b.setContentIntent(p); // Intent que será chamada ao clicar na notificação.
@@ -126,7 +126,7 @@ public class NotificationUtil {
         // Cria a notificação
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
         b.setDefaults(Notification.DEFAULT_ALL); // Ativa configurações padrão
-        b.setSmallIcon(R.drawable.ic_notification_icon); // Ícone
+        b.setSmallIcon(R.drawable.map_marker); // Ícone
         b.setContentTitle(contentTitle); // Título
         b.setContentText(contentText); // Mensagem
         b.setContentIntent(p); // Intent que será chamada ao clicar na notificação.

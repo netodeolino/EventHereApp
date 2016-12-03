@@ -22,4 +22,27 @@
         android:title="Minha localização"
         android:icon="@android:drawable/ic_menu_mylocation"
         app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/normal"
+        android:title="@string/normal_map"
+        android:icon="@android:drawable/ic_menu_mapmode"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/terrain"
+        android:title="@string/terrain_map"
+        android:icon="@android:drawable/ic_menu_compass"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/satellite"
+        android:title="@string/satellite_map"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/hybrid"
+        android:title="Híbrido"
+        android:icon="@android:drawable/ic_menu_mylocation"
+        app:showAsAction="always" />
 </menu>

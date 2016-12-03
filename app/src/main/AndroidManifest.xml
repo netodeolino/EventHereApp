@@ -37,12 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
--->
+
         <activity
             android:name=".activies.CreateAccountActivity"
             android:label="@string/createAccountActivityLabel"
@@ -177,6 +176,15 @@
 
         <activity
             android:name=".activies.MapaTest"
+            android:label="@string/createAccountActivityLabel"
+            android:parentActivityName=".activies.CreateEventActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activies.DashboardActivity" />
+        </activity>
+
+        <activity
+            android:name=".activies.MapaTestActivity"
             android:label="@string/createAccountActivityLabel"
             android:parentActivityName=".activies.CreateEventActivity">
             <meta-data

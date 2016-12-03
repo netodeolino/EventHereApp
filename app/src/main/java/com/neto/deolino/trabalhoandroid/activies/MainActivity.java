@@ -11,6 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.login.widget.LoginButton;
+
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.UserDAO;
 import com.neto.deolino.trabalhoandroid.interfaces.AsyncExecutable;
@@ -24,6 +27,7 @@ import com.neto.deolino.trabalhoandroid.util.PasswordHelper;
 public class MainActivity extends AppCompatActivity {
 
     public static final User user = new User();
+    LoginButton btLogin;
     EditText etMail, etPassword;
     ProgressBar pbLogin;
     CallbackManager callbackManager;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //if (id==0) {
             etMail = (EditText) findViewById(R.id.etMail);
             etPassword = (EditText) findViewById(R.id.etPassword);
-            //btLogin = (LoginButton) findViewById(R.id.btnFb);
+            btLogin = (LoginButton) findViewById(R.id.btnFb);
             pbLogin = (ProgressBar) findViewById(R.id.pbLogin);
             pbLogin.setVisibility(View.GONE);
         //} else {

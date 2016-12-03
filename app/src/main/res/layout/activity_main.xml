@@ -54,17 +54,17 @@
 
     </LinearLayout>
 
-<!-- Concertar ERRO que ocorre quando adiciona esse button
+<!-- Concertar ERRO que ocorre quando adiciona esse button -->
 
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
+        android:id="@+id/btnFb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/linearLayout3"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
--->
+
 
     <Button
         android:layout_width="match_parent"

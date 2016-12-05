@@ -1,11 +1,13 @@
 package com.neto.deolino.trabalhoandroid.activies;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -13,6 +15,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +35,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -41,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.neto.deolino.trabalhoandroid.R;
 import com.neto.deolino.trabalhoandroid.dao.LocationDAO;
 import com.neto.deolino.trabalhoandroid.dao.LocationDAOAndroid;
+import com.neto.deolino.trabalhoandroid.util.PermissionUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,6 +61,7 @@ public class MapaTestActivity extends FragmentActivity implements OnMapReadyCall
     private TextView texView;
     private GoogleApiClient apiClient;
     private LocationManager service;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     private BroadcastReceiver broadcastReceiver;
 
@@ -78,6 +84,7 @@ public class MapaTestActivity extends FragmentActivity implements OnMapReadyCall
         super.unregisterReceiver(receiver);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +104,7 @@ public class MapaTestActivity extends FragmentActivity implements OnMapReadyCall
         builder.addConnectionCallbacks(this);
         builder.addOnConnectionFailedListener(this);
         apiClient = builder.build();
-        // getLocation();
+        //getLocation();
     }
 
     public void setMarkers(){
@@ -140,6 +147,7 @@ public class MapaTestActivity extends FragmentActivity implements OnMapReadyCall
         apiClient.disconnect();
     }
 
+
     public void getLocation() {
         Location location = LocationServices.FusedLocationApi.getLastLocation(apiClient);
         String text = "Location = <" + location.getLatitude() + "," + location.getLongitude() + ">";
@@ -156,7 +164,17 @@ public class MapaTestActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
+              // Permission to access the location is missing.
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Permission to access the location is missing.
+                PermissionUtils.validate(this, LOCATION_PERMISSION_REQUEST_CODE,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+            } else if (mMap != null) {
+                // Access to the location has been granted to the app.
+                mMap.setMyLocationEnabled(true);
+            }
+        //mMap.setMyLocationEnabled(true);
         if(mMap != null){
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
@@ -326,6 +344,7 @@ public class MapaTestActivity extends FragmentActivity implements OnMapReadyCall
                 .snippet("Seu lugar de devolução")
                 .position(new LatLng(lat, lng));
         mMap.addMarker(options);
+
         circle = drawCircle(new LatLng(lat, lng));
     }
 

@@ -175,6 +175,7 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
             }
             else if(view.getId() == R.id.btnEndLocation || view.getId() == R.id.tvEventEnd){
                 startActivityForResult(builder.build(this), Constants.PLACE_PICKER_END_REQUEST);
+                //startActivity(new Intent(this, MapaTestActivity.class));
             }
 
         } catch (GooglePlayServicesRepairableException e) {

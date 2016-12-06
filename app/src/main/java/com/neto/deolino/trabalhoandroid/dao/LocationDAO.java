@@ -26,7 +26,7 @@ public class LocationDAO extends AbstractDAO<Location> {
     public void insert(Location location) {
         SQLiteDatabase database = this.mySQLiteOpenHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        //values.put("id", location.getId());
+        values.put("id", location.getId());
         values.put("latitude", location.getLatitude());
         values.put("longitude", location.getLongitude());
         values.put("address", location.getAddress());

@@ -174,23 +174,6 @@
                 android:value=".activies.EventDescriptionActivity" />
         </activity>
 
-        <activity
-            android:name=".activies.MapaTest"
-            android:label="@string/createAccountActivityLabel"
-            android:parentActivityName=".activies.CreateEventActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activies.DashboardActivity" />
-        </activity>
-
-        <activity
-            android:name=".activies.MapaTestActivity"
-            android:label="@string/createAccountActivityLabel"
-            android:parentActivityName=".activies.CreateEventActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activies.DashboardActivity" />
-        </activity>
 
         <receiver android:name=".service.local.MyBroadcastReceiver">
             <intent-filter>

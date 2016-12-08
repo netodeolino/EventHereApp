@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activies.MySettingsActivity">
+    tools:context="com.neto.deolino.trabalhoandroid.activies.MySettingsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,6 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/language_label"
+                android:id="@+id/tvUserName"
+                android:padding="10dp"
+                style="@style/tvSettings"/>
+
+            <Spinner
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spLanguages"/>
         </LinearLayout>
 
         <Button
@@ -29,7 +42,8 @@
             android:text="@string/change_your_password"
             android:id="@+id/btChangePassword"
             style="@style/button"
-            android:onClick="changePasswordButtonClicked" />
+            android:onClick="changePasswordButtonClicked"
+            />
 
         <Button
             android:layout_marginTop="20dp"
@@ -38,7 +52,8 @@
             android:text="@string/change_your_e_mail"
             android:id="@+id/btChangeMail"
             style="@style/button"
-            android:onClick="changeMailButtonClicked" />
+            android:onClick="changeMailButtonClicked"
+            />
 
         <Button
             android:layout_marginTop="20dp"
@@ -47,7 +62,8 @@
             android:text="@string/edit_account"
             android:id="@+id/btEditAccount"
             style="@style/button"
-            android:onClick="editAccountButtonClicked" />
+            android:onClick="editAccountButtonClicked"
+            />
 
     </LinearLayout>
 </ScrollView>

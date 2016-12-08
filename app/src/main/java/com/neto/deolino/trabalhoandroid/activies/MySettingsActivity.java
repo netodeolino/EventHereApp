@@ -35,13 +35,14 @@ public class MySettingsActivity extends AppCompatActivity {
     private static final int ACTIVITY_RESULT_UPDATE_ACCOUNT = 0;
     Spinner spLanguage;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_settings);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.languages, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spLanguage = (Spinner) findViewById(R.id.spLanguages);
+        spLanguage = (Spinner) findViewById(R.id.spLanguages);
         spLanguage.setAdapter(adapter);
         Log.d("LOCALE", Locale.getDefault().getLanguage());
         spLanguage.setSelection(PreferenceManager.getDefaultSharedPreferences(this).getInt("language", localeToInt(Locale.getDefault().getLanguage())));
@@ -146,7 +147,6 @@ public class MySettingsActivity extends AppCompatActivity {
 
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-
     }
 
 
@@ -197,7 +197,6 @@ public class MySettingsActivity extends AppCompatActivity {
 
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-
     }
 
 

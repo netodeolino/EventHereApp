@@ -75,6 +75,8 @@ public class EventDescriptionActivity extends AppCompatActivity {
                 tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
                 tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
                 tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
+                pbEventDescription = (ProgressBar) findViewById(R.id.pbEventDescription);
+                pbEventDescription.setVisibility(View.GONE);
                 populatePersonsList();
             }
         });

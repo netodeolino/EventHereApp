@@ -55,6 +55,7 @@ public class InviteActivity extends AppCompatActivity {
         pbInvite = (ProgressBar) findViewById(R.id.pbInvite);
         searchResults = new ArrayList<>();
         viewGroup = (ViewGroup) findViewById(R.id.list_item_person);
+        pbInvite.setVisibility(View.GONE);
 
         event = new Event();
 

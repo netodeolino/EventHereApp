@@ -63,9 +63,9 @@ public class AddFriendsActivity extends AppCompatActivity {
                     if(Server.RESPONSE_CODE==UserService.ERROR_INCORRECT_DATA){
                         Toast.makeText(AddFriendsActivity.this, getString(R.string.error_incorrect_search_input), Toast.LENGTH_LONG).show();
                     } else {
-                        //Create the adapter to convert the array to views
+                        //Cria um adapter para converter os arrays em visões
                         PersonAdapter adapter = new PersonAdapter(context, searchResults, PersonAdapter.FIND_FRIENDS);
-                        //attach the adapter to the listview
+                        //anexa o adapter ao listview
                         friendsSearchListView.setAdapter(adapter);
                         //ib.setVisibility(View.GONE);
                     }

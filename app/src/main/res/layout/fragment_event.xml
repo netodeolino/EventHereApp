@@ -3,8 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/colorPrimaryLight1"
-    android:descendantFocusability="blocksDescendants">
+    android:background="@color/colorPrimaryLight1">
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,7 +23,7 @@
                 android:id="@+id/tvEventDate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:text=""
                 style="@style/event_dateTime"
 
@@ -73,7 +72,8 @@
                 android:layout_weight="0.2"
                 android:text="@string/dash"
                 android:gravity="center"
-                android:textSize="20sp"
+
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary" />
 
@@ -90,17 +90,15 @@
 
         </LinearLayout>
 
+
     </LinearLayout>
 
-    <ImageView
+    <ImageButton
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/imageButton"
         android:src="@drawable/map_marker"
         android:scaleType="centerCrop"
-        android:background="@color/colorPrimaryLight1"
-        android:layout_margin="12dp"
-        android:baselineAlignBottom="false"
-        android:padding="5dp" />
+        android:background="@color/colorPrimaryLight1" />
 </LinearLayout>

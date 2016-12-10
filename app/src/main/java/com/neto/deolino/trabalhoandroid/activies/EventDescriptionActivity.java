@@ -75,6 +75,8 @@ public class EventDescriptionActivity extends AppCompatActivity {
                 tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
                 tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
                 tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
+                pbEventDescription = (ProgressBar) findViewById(R.id.pbEventDescription);
+                pbEventDescription.setVisibility(View.GONE);
                 populatePersonsList();
             }
         });
@@ -114,7 +116,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
         service.findConfirmedUsers(event, new AsyncExecutable() {
             @Override
             public void postExecute(int option) {
-                //pbEventDescription.setVisibility(View.GONE);
+                pbEventDescription.setVisibility(View.GONE);
                 User organizer = event.getOrganizer();
 
                 //Construct data source
@@ -145,7 +147,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
 
             @Override
             public void preExecute(int option) {
-                //pbEventDescription.setVisibility(View.VISIBLE);
+                pbEventDescription.setVisibility(View.VISIBLE);
             }
         });
     }
